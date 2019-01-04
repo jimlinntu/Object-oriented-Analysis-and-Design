@@ -34,7 +34,7 @@ public class MainPage extends Application{
 		// handle user event
 		searchTrain.setOnAction(event ->{
 			// Initialize BookTicket controller
-			book_ticket_controller = new BookTicket(this.scene);
+			book_ticket_controller = new BookTicket(this);
 		});
 		
 		
@@ -45,8 +45,15 @@ public class MainPage extends Application{
 		primaryStage.show();
 		
 	}
+	
+	public Scene getScene() {
+		return this.scene;
+	}
+	
 	public void restorePane() {
 		this.scene.setRoot(this.pane);
+		// Clear all controller
+		this.book_ticket_controller = null;
 	}
 
 }

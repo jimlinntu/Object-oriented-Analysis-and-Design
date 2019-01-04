@@ -1,25 +1,30 @@
 package boundary;
-
+import controller.BookTicket;
 import java.util.Arrays;
 import java.util.stream.*;
 import javafx.collections.*;
+import javafx.geometry.Orientation;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 
 public class BookTicketUI {
-	private Pane root_pane;
+	private BookTicket book_ticket_controller;
+	private GridPane root_pane;
+	private Pane info_pane;
+	private BorderPane goToMenuPane;
 	private Pane origin_destination_pane;
 	private Pane seat_type_pane;
 	private Pane seat_side;
 	private Pane ticket_num_pane;
 	
-	public BookTicketUI() {
-		
+	public BookTicketUI(BookTicket book_ticket_controller) {
+		this.book_ticket_controller = book_ticket_controller;
 	}
 	public void startInterface(Scene scene) {
-		root_pane = new VBox();
+		root_pane = new GridPane();
+		info_pane = new VBox();
 		// 起訖站
 		origin_destination_pane = new HBox();
 		Label origin_destination_label = new Label("起訖站");
@@ -64,32 +69,47 @@ public class BookTicketUI {
 		Label child_ticket_label = new Label("孩童票(6-11歲)");
 		Label disabled_ticket_label = new Label("愛心票");
 		Label senior_ticket_label = new Label("敬老票(65歲以上)");
-		Integer[] ticket_ints = IntStream.rangeClosed(0, 10).boxed().toArray(Integer[]::new);
-		ObservableList<Integer> ticket_nums = FXCollections.observableArrayList(ticket_ints);
-		ComboBox<Integer> adult_ticket_num = new ComboBox<Integer>(ticket_nums);
-		ComboBox<Integer> child_ticket_num = new ComboBox<Integer>(ticket_nums);
-		ComboBox<Integer> disabled_ticket_num = new ComboBox<Integer>(ticket_nums);
-		ComboBox<Integer> senior_ticket_num = new ComboBox<Integer>(ticket_nums);
+		
+		ComboBox<Integer> adult_ticket_num = new ComboBox<Integer>();
+		ComboBox<Integer> child_ticket_num = new ComboBox<Integer>();
+		ComboBox<Integer> disabled_ticket_num = new ComboBox<Integer>();
+		ComboBox<Integer> senior_ticket_num = new ComboBox<Integer>();
+		this.initializeTicketNum(adult_ticket_num);
+		this.initializeTicketNum(child_ticket_num);
+		this.initializeTicketNum(disabled_ticket_num);
+		this.initializeTicketNum(senior_ticket_num);
 		adult_ticket_num.setValue(0);
 		child_ticket_num.setValue(0);
 		disabled_ticket_num.setValue(0);
 		senior_ticket_num.setValue(0);
-		
-		
-
 		
 		ticket_num_pane.getChildren().addAll(ticket_num_label, 
 				adult_ticket_label, adult_ticket_num,
 				child_ticket_label, child_ticket_num,
 				disabled_ticket_label, disabled_ticket_num,
 				senior_ticket_label, senior_ticket_num);
+		// 
+		goToMenuPane = new BorderPane();
+		Button goToMenuButton = new Button("回到主選單");
+		goToMenuButton.setOnAction(event ->{
+			this.book_ticket_controller.goToMenu();
+		});
+		goToMenuPane.setRight(goToMenuButton);
 		// Gather All
-		root_pane.getChildren().addAll(origin_destination_pane, seat_type_pane, seat_side, ticket_num_pane);
+		info_pane.getChildren().addAll(origin_destination_pane, seat_type_pane, seat_side, ticket_num_pane);
+		
+		root_pane.add(info_pane, 0, 0);
+		root_pane.add(goToMenuPane, 0, 1);
 		// Change Root 
 		scene.setRoot(root_pane);
 	}
 	private void initializeStation(ComboBox<String> combobox) {
 		ObservableList<String> items = FXCollections.observableArrayList("南港", "台北", "板橋", "桃園", "新竹", "苗栗", "台中", "彰化", "雲林", "嘉義", "台南", "左營"); 
 		combobox.setItems(items);
+	}
+	private void initializeTicketNum(ComboBox<Integer> combobox) {
+		Integer[] ticket_ints = IntStream.rangeClosed(0, 10).boxed().toArray(Integer[]::new);
+		ObservableList<Integer> ticket_nums = FXCollections.observableArrayList(ticket_ints);
+		combobox.setItems(ticket_nums);
 	}
 }
