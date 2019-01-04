@@ -1,80 +1,52 @@
 package boundary;
 
-import boundary.GenerateTicketUI;
 
-import java.awt.EventQueue;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.stage.*;
+import javafx.scene.*;
+import javafx.scene.layout.*;
+import javafx.scene.control.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import controller.BookTicket;
 
-public class MainPage {
-	private GenerateTicketUI generate_ticket_ui;
-	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
+public class MainPage extends Application{
+	
+	private Pane pane;
+	private Scene scene;
+	private BookTicket book_ticket_controller;
+	
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainPage window = new MainPage();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		// TODO Auto-generated method stub
+		launch(args);
 	}
-
-	/**
-	 * Create the application.
-	 */
-	public MainPage() {
-		initialize();
+	
+	public void start(Stage primaryStage) {
+		primaryStage.setTitle("高鐵訂票系統");
+		this.pane = new VBox();
+		
+		Button searchTrain = new Button("查詢車次時刻表");
+		Button bookTicket = new Button("訂票"); 
+		Button searchBookID = new Button("查詢訂位代號");
+		Button searchReserve = new Button("查詢訂位紀錄");
+		
+		// handle user event
+		searchTrain.setOnAction(event ->{
+			// Initialize BookTicket controller
+			book_ticket_controller = new BookTicket(this.scene);
+		});
+		
+		
+		this.pane.getChildren().addAll(searchTrain, bookTicket, searchBookID, searchReserve);
+		
+		this.scene = new Scene(this.pane, 1000, 1000);
+		primaryStage.setScene(this.scene);
+		primaryStage.show();
+		
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
-		
-		
-		// 
-		this.generate_ticket_ui = new GenerateTicketUI();
-		JButton btnNewButton = new JButton("查詢車次時刻表");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// Refresh
-				
-			}
-		});
-		frame.getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("New button");
-		frame.getContentPane().add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("New button");
-		frame.getContentPane().add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton("New button");
-		frame.getContentPane().add(btnNewButton_3);
+	public void restorePane() {
+		this.scene.setRoot(this.pane);
 	}
 
 }
