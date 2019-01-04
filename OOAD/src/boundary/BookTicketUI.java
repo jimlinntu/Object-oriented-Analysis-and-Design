@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.stream.*;
 import javafx.collections.*;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
@@ -94,12 +95,17 @@ public class BookTicketUI {
 		goToMenuButton.setOnAction(event ->{
 			this.book_ticket_controller.goToMenu();
 		});
-		goToMenuPane.setRight(goToMenuButton);
+		goToMenuPane.setBottom(goToMenuButton);
 		// Gather All
 		info_pane.getChildren().addAll(origin_destination_pane, seat_type_pane, seat_side, ticket_num_pane);
 		
+		root_pane.setMaxWidth(Double.NEGATIVE_INFINITY);
+		root_pane.setMaxHeight(Double.NEGATIVE_INFINITY);
+		GridPane.setHgrow(info_pane, Priority.ALWAYS);
+		GridPane.setVgrow(goToMenuPane, Priority.ALWAYS);
 		root_pane.add(info_pane, 0, 0);
 		root_pane.add(goToMenuPane, 0, 1);
+		root_pane.setGridLinesVisible(true);
 		// Change Root 
 		scene.setRoot(root_pane);
 	}

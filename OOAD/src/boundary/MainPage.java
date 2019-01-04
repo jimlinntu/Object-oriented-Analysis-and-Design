@@ -42,7 +42,7 @@ public class MainPage extends Application{
 		
 		this.pane.getChildren().addAll(searchTrain, bookTicket, searchBookID, searchReserve);
 		
-		this.scene = new Scene(this.pane, 1000, 1000);
+		this.scene = new Scene(this.pane, 600, 600);
 		primaryStage.setScene(this.scene);
 		primaryStage.show();
 		
