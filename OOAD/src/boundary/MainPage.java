@@ -10,12 +10,14 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 
 import controller.BookTicket;
+import controller.GenerateTicket;
 
 public class MainPage extends Application{
 	
 	private Pane pane;
 	private Scene scene;
 	private BookTicket book_ticket_controller;
+	private GenerateTicket generate_ticket_controller;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -34,7 +36,7 @@ public class MainPage extends Application{
 		// handle user event
 		searchTrain.setOnAction(event ->{
 			// Initialize BookTicket controller
-			book_ticket_controller = new BookTicket(this);
+			book_ticket_controller = new BookTicket(this, generate_ticket_controller);
 		});
 		
 		

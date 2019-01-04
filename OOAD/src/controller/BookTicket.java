@@ -1,25 +1,34 @@
 package controller;
+
+import java.util.ArrayList;
+
+import boundary.MainPage; 
+import boundary.BookTicketUI;
+import controller.GenerateTicket;
+import entity.Ticket;
+import entity.Info;
+
 import javafx.stage.*;
 import javafx.collections.FXCollections;
 import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
-import boundary.BookTicketUI;
 import javafx.collections.*;
 
 public class BookTicket {
 	
+	private MainPage main_page;
 	private BookTicketUI book_ticket_ui;
-	private DAO data_object ;
-	private GenerateTicket generate_ticket ;
-	private ArrayList<Ticket> tickets ;
-	private Order order ;
+	//private DAO data_object ;
+	private GenerateTicket generate_ticket_controller ;
+	//private Order order ;
 	private Info info = null ;
 	
-	public BookTicket(Scene scene, GenerateTicket generate_ticket) {
-		book_ticket_ui = new BookTicketUI();
-		book_ticket_ui.startInterface(scene);
-		this.generate_ticket = generate_ticket ;
+	public BookTicket(MainPage main_page, GenerateTicket generate_ticket_controller) {
+		this.main_page = main_page;
+		this.generate_ticket_controller = generate_ticket_controller ;
+		book_ticket_ui = new BookTicketUI(this);
+		book_ticket_ui.startInterface(main_page.getScene());
 	}
 	
 	public void inputTrainInfo() {
@@ -38,5 +47,9 @@ public class BookTicket {
 	
 	public void rejectOrder() {
 		order.release() ;
+	}
+	
+	public void goToMenu() {
+		this.main_page.restorePane();
 	}
 }
