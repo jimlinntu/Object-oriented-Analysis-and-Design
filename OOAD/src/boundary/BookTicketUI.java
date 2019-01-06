@@ -51,13 +51,4 @@ public class BookTicketUI {
 		// Insert BookTicketUI ServiceAnchorPane
 		root_pane.getChildren().add(this.service_pane);
 	} 
-	private void initializeStation(ComboBox<String> combobox) {
-		ObservableList<String> items = FXCollections.observableArrayList("南港", "台北", "板橋", "桃園", "新竹", "苗栗", "台中", "彰化", "雲林", "嘉義", "台南", "左營"); 
-		combobox.setItems(items);
-	}
-	private void initializeTicketNum(ComboBox<Integer> combobox) {
-		Integer[] ticket_ints = IntStream.rangeClosed(0, 10).boxed().toArray(Integer[]::new);
-		ObservableList<Integer> ticket_nums = FXCollections.observableArrayList(ticket_ints);
-		combobox.setItems(ticket_nums);
-	}
 }
