@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.MainPageFXMLController">
+  <children>
+    <MenuBar id="MenuBar" VBox.vgrow="NEVER">
+      <menus>
+        <Menu id="ServiceMenu" mnemonicParsing="false" text="服務">
+          <items>
+            <MenuItem id="SearchTrainItem" fx:id="searchTrainItem" mnemonicParsing="false" text="查詢車次時刻表" />
+            <MenuItem id="BookTicketItem" fx:id="bookTicketItem" mnemonicParsing="false" text="訂票" />
+            <MenuItem id="SearchReserveItem" fx:id="searchReserveItem" mnemonicParsing="false" text="查詢訂位紀錄" />
+            <MenuItem id="SearchBookID" fx:id="searchBookID" mnemonicParsing="false" text="查詢訂位代號" />
+                  <MenuItem id="goToMenuItem" fx:id="goToMenuItem" mnemonicParsing="false" text="回到主畫面" />
+          </items>
+        </Menu>
+        <Menu id="HelpMenu" mnemonicParsing="false" text="幫助">
+          <items>
+            <MenuItem mnemonicParsing="false" text="關於高鐵訂票系統" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane id="ServiceAnchorPane" fx:id="service_pane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" />
+  </children>
+</VBox>
