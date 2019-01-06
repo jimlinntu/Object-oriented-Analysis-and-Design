@@ -1,26 +1,19 @@
-import System ;
-
 package controller;
 
+import boundary.MainPage;
+import boundary.SearchTrainUI;
+
+
 public class SearchTrain {
-	private DAO data_object ;
-	private SearchTrainUI search_train_ui ;
-	
-//	public SearchTrain(DAO data_object, SearchTrainUI ui) {
-	public SearchTrain(DAO data_object) {
-		this.data_object = data_object ;
-//		this.search_train_ui = ui ;
-	}
-	
-	// searchTrain -> search
-	public void search(String train_id, int date, int start, int end) {
-		Vector<Train> trains ;
-		trains = data_object.listTrains(train_id, date, start, end) ;
-		
-		// search_train_ui.showTrains(trains) ;
-		for (Train train: trains) {
-			System.out.println(train.id) ;
+	private MainPage main_page;
+	private SearchTrainUI search_train_ui;
+	public SearchTrain(MainPage main_page) {
+		this.main_page = main_page;
+		this.search_train_ui = new SearchTrainUI(this);
+		try{
+			this.search_train_ui.startInterface(main_page.getRootPane());
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
-	
 }
