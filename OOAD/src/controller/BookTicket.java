@@ -22,7 +22,6 @@ public class BookTicket {
 	//private DAO data_object ;
 	private GenerateTicket generate_ticket_controller ;
 	//private Order order ;
-	private Info info = null ;
 	
 	public BookTicket(MainPage main_page, GenerateTicket generate_ticket_controller) {
 		this.main_page = main_page;
@@ -31,14 +30,13 @@ public class BookTicket {
 		book_ticket_ui.startInterface(main_page.getScene());
 	}
 	
-	public void inputTrainInfo() {
-		tickets = generate_ticket.generate() ;
-		order = new Order(tickets) ;
+	public void inputTrainInfo(Info info) {
+		order = generate_ticket_controller.generate(info) ;
 		
 		// is it?
-		data_object.writeOrder() ;
+		data_object.writeOrder(order) ;
 		
-		ui.showOrder(order) ;
+		book_ticket_ui.showOrder(order) ;
 	}
 	
 	public void confirmOrder() {
