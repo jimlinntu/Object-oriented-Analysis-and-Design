@@ -17,7 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
-public class BookTicketUIFXMLController implements Initializable {
+public class BookTicketUIFXMLController extends BaseFXMLController implements Initializable {
 	@FXML
 	public MenuItem goToMenu;
     @FXML
@@ -81,10 +81,5 @@ public class BookTicketUIFXMLController implements Initializable {
 		Integer[] ticket_ints = IntStream.rangeClosed(0, 10).boxed().toArray(Integer[]::new);
 		ObservableList<Integer> ticket_nums = FXCollections.observableArrayList(ticket_ints);
 		combobox.setItems(ticket_nums);
-	}
-    
-    private void initializeStation(ComboBox<String> combobox) {
-		ObservableList<String> items = FXCollections.observableArrayList(Station.CHI_NAME); 
-		combobox.setItems(items);
 	}
 }

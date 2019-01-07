@@ -24,9 +24,9 @@ public class BookTicket {
 	//private Order order ;
 	private Info info = null ;
 	
-	public BookTicket(MainPage main_page, GenerateTicket generate_ticket_controller) {
+	public BookTicket(MainPage main_page) {
 		this.main_page = main_page;
-		this.generate_ticket_controller = generate_ticket_controller ;
+		this.generate_ticket_controller = new GenerateTicket() ;
 		this.book_ticket_ui = new BookTicketUI(this);
 		
 		try{

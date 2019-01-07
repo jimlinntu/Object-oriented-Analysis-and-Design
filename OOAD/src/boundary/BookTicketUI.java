@@ -25,10 +25,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
-public class BookTicketUI {
+public class BookTicketUI extends BaseUI{
 	private BookTicketUIFXMLController fxml_controller;
 	private BookTicket book_ticket_controller;
-	private Pane service_pane;
 	
 	public BookTicketUI(BookTicket book_ticket_controller) {
 		// Set controller association
@@ -45,10 +44,4 @@ public class BookTicketUI {
 		// Load fxml controller
 		this.fxml_controller = fxmlloader.getController();
 	}
-	public void startInterface(Pane root_pane) {
-		// Remove Original UI ServiceAnchorPane
-		root_pane.getChildren().remove(root_pane.lookup("#ServiceAnchorPane"));
-		// Insert BookTicketUI ServiceAnchorPane
-		root_pane.getChildren().add(this.service_pane);
-	} 
 }

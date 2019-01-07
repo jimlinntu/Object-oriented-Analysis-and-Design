@@ -16,7 +16,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 
-public class SearchTrainUIFXMLController implements Initializable{
+public class SearchTrainUIFXMLController extends BaseFXMLController implements Initializable{
 	@FXML
     public MenuItem searchTrainItem;
 
@@ -62,10 +62,6 @@ public class SearchTrainUIFXMLController implements Initializable{
         this.go_or_apart.getItems().addAll("出發", "抵達");
     }
     
-    private void initializeStation(ComboBox<String> combobox) {
-		ObservableList<String> items = FXCollections.observableArrayList(Station.CHI_NAME); 
-		combobox.setItems(items);
-	}
     
     private void initializeTime(ComboBox<String> combobox) {
     	int start = 5 * 60;
