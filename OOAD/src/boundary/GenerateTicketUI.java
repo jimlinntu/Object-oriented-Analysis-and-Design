@@ -4,4 +4,5 @@ import controller.GenerateTicket;
 
 public class GenerateTicketUI { 
 	
+	
 }

@@ -26,8 +26,13 @@ public class BookTicket {
 	public BookTicket(MainPage main_page, GenerateTicket generate_ticket_controller) {
 		this.main_page = main_page;
 		this.generate_ticket_controller = generate_ticket_controller ;
-		book_ticket_ui = new BookTicketUI(this);
-		book_ticket_ui.startInterface(main_page.getScene());
+		this.book_ticket_ui = new BookTicketUI(this);
+		
+		try{
+			this.book_ticket_ui.startInterface(main_page.getRootPane());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void inputTrainInfo(Info info) {
@@ -48,6 +53,6 @@ public class BookTicket {
 	}
 	
 	public void goToMenu() {
-		this.main_page.restorePane();
+		this.main_page.goToMenu();
 	}
 }
