@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -17,7 +18,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
-public class BookTicketUIFXMLController implements Initializable {
+public class BookTicketUIFXMLController extends BaseFXMLController implements Initializable {
 	@FXML
 	public MenuItem goToMenu;
     @FXML
@@ -64,6 +65,8 @@ public class BookTicketUIFXMLController implements Initializable {
     public ComboBox<Integer> seniorTicket;
     @FXML
     public CheckBox OnlyshowEarly;
+    @FXML
+    public Button startSearch;
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
         System.out.println(this.getClass().toString() + " loaded!");
@@ -81,10 +84,5 @@ public class BookTicketUIFXMLController implements Initializable {
 		Integer[] ticket_ints = IntStream.rangeClosed(0, 10).boxed().toArray(Integer[]::new);
 		ObservableList<Integer> ticket_nums = FXCollections.observableArrayList(ticket_ints);
 		combobox.setItems(ticket_nums);
-	}
-    
-    private void initializeStation(ComboBox<String> combobox) {
-		ObservableList<String> items = FXCollections.observableArrayList(Station.CHI_NAME); 
-		combobox.setItems(items);
 	}
 }
