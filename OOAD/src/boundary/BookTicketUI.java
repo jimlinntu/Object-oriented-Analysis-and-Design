@@ -25,24 +25,14 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
-public class BookTicketUI extends BaseUI{
-	private BookTicketUIFXMLController fxml_controller;
+public class BookTicketUI extends BaseUI<BookTicketUIFXMLController>{
 	private BookTicket book_ticket_controller;
 	
 	public BookTicketUI(BookTicket book_ticket_controller) {
 		// Set controller association
 		this.book_ticket_controller = book_ticket_controller;
-		// Load fxml
-		FXMLLoader fxmlloader = new FXMLLoader();
-		try{
-			this.service_pane = fxmlloader.load(new FileInputStream("fxml/BookTicket.fxml"));
-			// Get service pane
-			this.service_pane = (Pane)((Node)this.service_pane).lookup("#ServiceAnchorPane"); // Only get Service Anchor Pane
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		// Load fxml controller
-		this.fxml_controller = fxmlloader.getController();
+		// Load page
+		this.loadView("fxml/BookTicket.fxml");
 	}
 	
 	protected void prepareActions() {

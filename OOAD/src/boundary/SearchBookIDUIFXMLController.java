@@ -12,7 +12,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public class SearchBookIDUIFXMLController implements Initializable{
+public class SearchBookIDUIFXMLController extends BaseFXMLController implements Initializable{
 
     @FXML
     public MenuItem searchTrainItem;
@@ -53,5 +53,8 @@ public class SearchBookIDUIFXMLController implements Initializable{
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
         System.out.println(this.getClass().toString() + " loaded!");
+        //
+        this.initializeStation(this.origin);
+        this.initializeStation(this.dest);
     }
 }
