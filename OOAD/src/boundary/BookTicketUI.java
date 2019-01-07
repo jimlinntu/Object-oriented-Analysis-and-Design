@@ -44,4 +44,8 @@ public class BookTicketUI extends BaseUI{
 		// Load fxml controller
 		this.fxml_controller = fxmlloader.getController();
 	}
+	
+	protected void prepareActions() {
+		
+	}
 }

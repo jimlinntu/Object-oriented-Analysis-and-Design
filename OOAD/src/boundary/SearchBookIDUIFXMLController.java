@@ -15,40 +15,40 @@ import javafx.scene.layout.AnchorPane;
 public class SearchBookIDUIFXMLController implements Initializable{
 
     @FXML
-    private MenuItem searchTrainItem;
+    public MenuItem searchTrainItem;
 
     @FXML
-    private MenuItem bookTicketItem;
+    public MenuItem bookTicketItem;
 
     @FXML
-    private MenuItem searchReserveItem;
+    public MenuItem searchReserveItem;
 
     @FXML
-    private MenuItem searchBookID;
+    public MenuItem searchBookID;
 
     @FXML
-    private MenuItem goToMenuItem;
+    public MenuItem goToMenuItem;
 
     @FXML
-    private AnchorPane service_pane;
+    public AnchorPane service_pane;
 
     @FXML
-    private TextField userID;
+    public TextField userID;
 
     @FXML
-    private ComboBox<String> origin;
+    public ComboBox<String> origin;
 
     @FXML
-    private ComboBox<String> dest;
+    public ComboBox<String> dest;
 
     @FXML
-    private DatePicker date;
+    public DatePicker date;
 
     @FXML
-    private TextField trainID;
+    public TextField trainID;
 
     @FXML
-    private Button startSearch;
+    public Button startSearch;
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {

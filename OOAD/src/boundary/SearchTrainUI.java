@@ -7,10 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
-public class SearchTrainUI {
+public class SearchTrainUI extends BaseUI{
 	private SearchTrainUIFXMLController fxml_controller;
 	private SearchTrain search_train_controller;
-	private Pane service_pane;
 	
 	public SearchTrainUI(SearchTrain search_train_controller) {
 		// Set controller association
@@ -27,11 +26,8 @@ public class SearchTrainUI {
 		// Load fxml controller
 		this.fxml_controller = fxmlloader.getController();
 	}
-
-	public void startInterface(Pane root_pane) {
-		// Remove Original UI ServiceAnchorPane
-		root_pane.getChildren().remove(root_pane.lookup("#ServiceAnchorPane"));
-		// Insert BookTicketUI ServiceAnchorPane
-		root_pane.getChildren().add(this.service_pane);
+	
+	protected void prepareActions() {
+		
 	}
 }

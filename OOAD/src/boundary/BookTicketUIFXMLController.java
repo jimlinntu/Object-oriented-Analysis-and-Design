@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -64,6 +65,8 @@ public class BookTicketUIFXMLController extends BaseFXMLController implements In
     public ComboBox<Integer> seniorTicket;
     @FXML
     public CheckBox OnlyshowEarly;
+    @FXML
+    public Button startSearch;
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
         System.out.println(this.getClass().toString() + " loaded!");

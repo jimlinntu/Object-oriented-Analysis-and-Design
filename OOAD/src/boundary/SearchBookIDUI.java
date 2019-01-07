@@ -27,4 +27,7 @@ public class SearchBookIDUI extends BaseUI{
 		// Load fxml controller
 		this.fxml_controller = fxmlloader.getController();
 	}
+	protected void prepareActions() {
+		//this.fxml_controller.startSearch
+	}
 }
