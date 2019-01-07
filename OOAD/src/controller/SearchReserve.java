@@ -2,8 +2,9 @@ package controller;
 
 import boundary.MainPage;
 import boundary.SearchReserveUI;
+import controller.ShowOrder_reserve;
 import entity.DataAccessObject;
-
+import entity.Order;
 
 public class SearchReserve {
 	private MainPage main_page;
@@ -20,5 +21,10 @@ public class SearchReserve {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void searchOrder(String userID, String orderID) {
+		ShowOrder_reserve show = new ShowOrder_reserve(this.main_page, this.dao, this.dao.getOrder(userID, orderID));
+		return;
 	}
 }

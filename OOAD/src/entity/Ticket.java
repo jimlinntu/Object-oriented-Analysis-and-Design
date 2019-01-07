@@ -2,9 +2,11 @@ package entity;
 
 public class Ticket {
 
-	public Ticket(Seat seat) {
+	public String seat;
+	public Ticket(String seat) {
 		// Lock seat
-		seat.lockSeat();
+//		seat.lockSeat();
+		this.seat = seat;
 		
 	}
 	public static void main(String[] args) {

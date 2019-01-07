@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundary.SearchReserveUIFXMLController">
   <children>
@@ -37,6 +38,11 @@
             <Label layoutX="155.0" layoutY="162.0" text="訂位代號" />
             <TextField fx:id="bookid" layoutX="264.0" layoutY="157.0" />
             <Button fx:id="loginSearch" layoutX="267.0" layoutY="230.0" mnemonicParsing="false" text="登入查詢" />
+            <Label fx:id="errorMessage" alignment="CENTER" layoutX="378.0" layoutY="338.0" prefHeight="17.0" prefWidth="234.0" text="錯誤訊息" textFill="#db3232" visible="false">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
   </children>
 </VBox>

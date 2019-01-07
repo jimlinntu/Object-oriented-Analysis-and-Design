@@ -9,35 +9,40 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 
 public class SearchReserveUIFXMLController implements Initializable{
 
     @FXML
-    private MenuItem searchTrainItem;
+    protected MenuItem searchTrainItem;
 
     @FXML
-    private MenuItem bookTicketItem;
+    protected MenuItem bookTicketItem;
 
     @FXML
-    private MenuItem searchReserveItem;
+    protected MenuItem searchReserveItem;
 
     @FXML
-    private MenuItem searchBookID;
+    protected MenuItem searchBookID;
 
     @FXML
-    private MenuItem goToMenuItem;
+    protected MenuItem goToMenuItem;
 
     @FXML
-    private AnchorPane service_pane;
+    protected AnchorPane service_pane;
 
     @FXML
-    private TextField userID;
+    protected TextField userID;
 
     @FXML
-    private TextField bookid;
+    protected TextField bookid;
 
     @FXML
-    private Button loginSearch;
+    protected Button loginSearch;
+
+    @FXML
+    public Label errorMessage;
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
