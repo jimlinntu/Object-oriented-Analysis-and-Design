@@ -7,17 +7,18 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 public abstract class BaseUI<T> { 
-	private T fxml_controller;
-	public Pane service_pane;
+	protected T fxml_controller;
+	protected Pane root_pane;
+	protected Pane service_pane;
 	
 	// abstract method for creating action listener
 	protected abstract void prepareActions();
 	// General start interface function
-	public void startInterface(Pane root_pane) {
+	public void startInterface() {
 		// Remove Original UI ServiceAnchorPane
-		root_pane.getChildren().remove(root_pane.lookup("#ServiceAnchorPane"));
-		// Insert BookTicketUI ServiceAnchorPane
-		root_pane.getChildren().add(this.service_pane);
+		this.root_pane.getChildren().remove(this.root_pane.lookup("#ServiceAnchorPane"));
+		// Insert ServiceAnchorPane
+		this.root_pane.getChildren().add(this.service_pane);
 	}
 	
 	public void loadView(String fxml_file) {

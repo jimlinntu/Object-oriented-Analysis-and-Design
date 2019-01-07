@@ -64,12 +64,12 @@
                </toggleGroup>
             </RadioButton>
             <RadioButton fx:id="idBook" layoutX="289.0" layoutY="163.0" mnemonicParsing="false" text="直接輸入車次號碼" toggleGroup="$booktype" />
-            <DatePicker fx:id="goDate" layoutX="117.0" layoutY="202.0" showWeekNumbers="true" />
+            <DatePicker fx:id="goDate" editable="false" layoutX="117.0" layoutY="202.0" showWeekNumbers="true" />
             <CheckBox fx:id="buyBack" layoutX="490.0" layoutY="207.0" mnemonicParsing="false" text="訂購回程" />
             <Label graphicTextGap="0.0" layoutX="321.0" layoutY="207.0" text="約" />
             <ComboBox fx:id="goTime" layoutX="344.0" layoutY="202.0" prefHeight="27.0" prefWidth="96.0" />
             <Label layoutX="453.0" layoutY="207.0" text="出發" />
-            <DatePicker fx:id="backDate" disable="true" layoutX="117.0" layoutY="241.0" showWeekNumbers="true" />
+            <DatePicker fx:id="backDate" disable="true" editable="false" layoutX="117.0" layoutY="241.0" showWeekNumbers="true" />
             <Label disable="true" graphicTextGap="0.0" layoutX="321.0" layoutY="246.0" text="約" />
             <ComboBox fx:id="backTime" disable="true" layoutX="344.0" layoutY="241.0" prefHeight="27.0" prefWidth="96.0" />
             <Label disable="true" layoutX="453.0" layoutY="246.0" text="出發" />

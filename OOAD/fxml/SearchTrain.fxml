@@ -38,7 +38,7 @@
             <Label layoutX="129.0" layoutY="230.0" text="時間" />
             <ComboBox fx:id="origin" layoutX="245.0" layoutY="82.0" prefWidth="150.0" />
             <ComboBox fx:id="dest" layoutX="245.0" layoutY="131.0" prefWidth="150.0" />
-            <DatePicker fx:id="date" layoutX="223.0" layoutY="181.0" />
+            <DatePicker fx:id="date" editable="false" layoutX="223.0" layoutY="181.0" />
             <ComboBox fx:id="time" layoutX="190.0" layoutY="225.0" prefWidth="150.0" />
             <ComboBox fx:id="go_or_apart" layoutX="379.0" layoutY="225.0" prefHeight="27.0" prefWidth="76.0" />
             <Button fx:id="search" layoutX="291.0" layoutY="288.0" mnemonicParsing="false" text="立即查詢" />

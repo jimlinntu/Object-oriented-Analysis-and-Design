@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -50,11 +52,21 @@ public class SearchBookIDUIFXMLController extends BaseFXMLController implements 
     @FXML
     public Button startSearch;
     
+    @FXML
+    public Label errorMessage;
+    
+    @FXML
+    public ListView<String> listView;
+    
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
         System.out.println(this.getClass().toString() + " loaded!");
         //
-        this.initializeStation(this.origin);
-        this.initializeStation(this.dest);
+        if(this.origin != null) {
+        	this.initializeStation(this.origin);
+        }
+        if(this.dest != null) {
+        	this.initializeStation(this.dest);
+        }
     }
 }

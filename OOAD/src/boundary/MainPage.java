@@ -19,6 +19,7 @@ import java.net.URL;
 import controller.BookTicket;
 import controller.GenerateTicket;
 import controller.SearchTrain;
+import entity.DataAccessObject;
 import controller.SearchBookID;
 import controller.SearchReserve;
 
@@ -33,6 +34,8 @@ public class MainPage extends Application{
 	private SearchTrain search_train_controller;
 	private SearchBookID search_bookid_controller;
 	private SearchReserve search_reserve_controller;
+	// Data Access Object Section
+	private DataAccessObject dao;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -44,6 +47,7 @@ public class MainPage extends Application{
 		FXMLLoader fxmlloader = new FXMLLoader();
 		this.root_pane = fxmlloader.load(new FileInputStream("fxml/MainPage.fxml"));
 		this.fxml_controller = fxmlloader.getController();
+		this.dao = new DataAccessObject();
 		// Set title
 		primaryStage.setTitle("高鐵訂票系統");
 		// Prepare all actions 
@@ -58,21 +62,21 @@ public class MainPage extends Application{
 	private void prepareActions(){
 		// 查詢車次時刻表
 		this.fxml_controller.searchTrainItem.setOnAction(event->{
-			this.search_train_controller = new SearchTrain(this);
+			this.search_train_controller = new SearchTrain(this, this.dao);
 		});
 		// 訂票
 		this.fxml_controller.bookTicketItem.setOnAction(event->{
-			this.book_ticket_controller = new BookTicket(this);
+			this.book_ticket_controller = new BookTicket(this, this.dao);
 		});
 		
 		// 查詢訂位紀錄
 		this.fxml_controller.searchReserveItem.setOnAction(event->{
-			this.search_reserve_controller = new SearchReserve(this);
+			this.search_reserve_controller = new SearchReserve(this, this.dao);
 		});
 		
 		// 查詢訂位代號
 		this.fxml_controller.searchBookID.setOnAction(event->{
-			this.search_bookid_controller = new SearchBookID(this);
+			this.search_bookid_controller = new SearchBookID(this, this.dao);
 		});
 		
 		// 回到主畫面

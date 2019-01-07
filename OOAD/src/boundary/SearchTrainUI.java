@@ -10,9 +10,10 @@ import javafx.scene.layout.Pane;
 public class SearchTrainUI extends BaseUI<SearchTrainUIFXMLController>{
 	private SearchTrain search_train_controller;
 	
-	public SearchTrainUI(SearchTrain search_train_controller) {
+	public SearchTrainUI(SearchTrain search_train_controller, Pane root_pane) {
 		// Set controller association
 		this.search_train_controller = search_train_controller;		
+		this.root_pane = root_pane;
 		// Load page
 		this.loadView("fxml/SearchTrain.fxml");
 	}

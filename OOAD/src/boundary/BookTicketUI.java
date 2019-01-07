@@ -28,9 +28,10 @@ import javafx.scene.control.ToggleGroup;
 public class BookTicketUI extends BaseUI<BookTicketUIFXMLController>{
 	private BookTicket book_ticket_controller;
 	
-	public BookTicketUI(BookTicket book_ticket_controller) {
+	public BookTicketUI(BookTicket book_ticket_controller, Pane root_pane) {
 		// Set controller association
 		this.book_ticket_controller = book_ticket_controller;
+		this.root_pane = root_pane;
 		// Load page
 		this.loadView("fxml/BookTicket.fxml");
 	}
