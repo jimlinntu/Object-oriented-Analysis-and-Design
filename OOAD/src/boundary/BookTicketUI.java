@@ -1,6 +1,7 @@
 package boundary;
 import controller.BookTicket;
 import entity.Order;
+import entity.Ticket;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +29,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
 
-public class BookTicketUI extends BaseUI<BookTicketUIFXMLController>{
+public class BookTicketUI extends BaseUI<BaseFXMLController>{
 	private BookTicket book_ticket_controller;
 	
 	public BookTicketUI(BookTicket book_ticket_controller, Pane root_pane) {
@@ -60,17 +61,29 @@ public class BookTicketUI extends BaseUI<BookTicketUIFXMLController>{
 			// TODO: null is for temporary test
 			Order order = this.book_ticket_controller.inputTrainInfo(null);
 			
+			if(!this.showOrder(order)) {
+				System.out.println("[!] Failed: showOrder fail");
+			};
 			
 		};
-		
-		
-		this.fxml_controller.startSearch.setOnAction(inputTraininfo);
-		
-		
+
+		((BookTicketUIFXMLController)this.fxml_controller).startSearch.setOnAction(inputTraininfo);
 	}
 	
 	public boolean showOrder(Order order) {
 		this.loadView("fxml/ShowOrder_reserve.fxml");
+		
+		ShowOrder_reserveUIFXMLController tmp = (ShowOrder_reserveUIFXMLController)this.fxml_controller;
+		tmp.setOrder(order);
+		tmp.confirm.setText("確認");
+		tmp.revise.setText("取消");
+		
+		try {
+			this.startInterface();
+		} catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 		
 		return true;
 	}

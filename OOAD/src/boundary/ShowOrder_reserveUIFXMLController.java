@@ -1,16 +1,22 @@
 package boundary;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 
-public class ShowOrder_reserveUIFXMLController extends BaseFXMLController {
+import entity.Order;
+import entity.Ticket;
+
+public class ShowOrder_reserveUIFXMLController extends BaseFXMLController implements Initializable{
 
     @FXML
     protected MenuItem searchTrainItem;
@@ -75,5 +81,26 @@ public class ShowOrder_reserveUIFXMLController extends BaseFXMLController {
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
         System.out.println(this.getClass().toString() + " loaded!");
+    }
+    
+    // used in both SearchReserve and BookTicket use case
+    public void setOrder(Order order) {
+    	this.adultTicket.setText(String.valueOf(order.adultTicket));
+		this.childTicket.setText(String.valueOf(order.childTicket));
+		this.disableTicket.setText(String.valueOf(order.disableTicket));
+		this.seniorTicket.setText(String.valueOf(order.seniorTicket));
+		this.price.setText(String.valueOf(order.price));
+		this.origin.setText(order.origin);
+		this.dest.setText(order.dest);
+		this.goTime.setText(order.goTime);
+		this.arriveTime.setText(order.arriveTime);
+		this.orderid.setText(order.orderID);
+		this.userid.setText(order.userID);
+		
+		ArrayList<String>seats = new ArrayList<String>();
+		for(Ticket t : order.ticketList) {
+			seats.add(t.seat);
+		}
+		this.seats.setItems(FXCollections.observableArrayList(seats));
     }
 }

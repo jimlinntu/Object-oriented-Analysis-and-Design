@@ -25,6 +25,7 @@ public class BookTicket {
 		this.main_page = main_page;
 		this.generate_ticket_controller = new GenerateTicket(main_page, dao) ;
 		this.book_ticket_ui = new BookTicketUI(this, main_page.getRootPane());
+		this.dao = dao;
 		
 		try{
 			this.book_ticket_ui.startInterface();
@@ -35,7 +36,9 @@ public class BookTicket {
 	
 
 	public Order inputTrainInfo(Info info) {
-		order = this.generate_ticket_controller.generate(info) ;
+		// TODO: disabled temporarily
+		//order = this.generate_ticket_controller.generate(info) ;
+		order = dao.getOrder("","");
 				
 		// is it?
 		if (!dao.writeOrder(order)) {
