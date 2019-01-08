@@ -15,4 +15,8 @@ public class Order {
 	public int seniorTicket;
 	public int price;
 	public ArrayList<Ticket> ticketList;
+	
+	public Order() {
+		
+	}
 }

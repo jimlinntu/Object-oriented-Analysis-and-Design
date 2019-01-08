@@ -4,7 +4,11 @@
 package controller;
 
 import entity.*;
+import javafx.scene.control.Dialog;
 import boundary.GenerateTicketUI;
+import boundary.MainPage;
+import boundary.SearchBookIDUI;
+
 import java.util.*;
 
 
@@ -15,26 +19,33 @@ import java.util.*;
  */
 public class GenerateTicket {
 
+	private MainPage main_page;
 	private GenerateTicketUI generate_ticket_ui;
 	private DataAccessObject dao;
-	private Info info = null;
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
+	
+	public GenerateTicket(MainPage main_page, DataAccessObject dao) {
+		this.main_page = main_page;
+		this.generate_ticket_ui = new GenerateTicketUI(this, main_page.getRootPane());
+		this.dao = dao;
 	}
-	
+	/**
+	 * This function will change ServiceAnchorPane and let
+	 * user select which train it want to take.
+	 * @author jimlin
+	 * @return Order
+	 */
 	public Order generate(Info info) {
-		Order order;
-		// start generate ticket ui interface
-		this.generate_ticket_ui.startInterface();
-		// wait until UI dead?
-		
-		//
-		assert this.info == null;
-		this.info = info;
-	
-		return order; //
+		ArrayList<Train> train_list = this.dao.listTrains();
+		// a blocking startInterface function
+		if(train_list.size() == 0) {
+			// there is no train to select
+			return null;
+		}else {
+			int trainID = this.generate_ticket_ui.selectTrain(train_list);
+			// 
+			System.out.println("你選擇了: " + trainID + "車次");
+			return null; //
+		}
 	}
 	public boolean inputTrainID(int train_id) {
 		// Use train_id to retrieve train

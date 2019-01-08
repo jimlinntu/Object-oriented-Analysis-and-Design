@@ -1,5 +1,6 @@
 package boundary;
 import controller.BookTicket;
+import entity.Order;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +10,8 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.stream.*;
 import javafx.collections.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.stage.*;
@@ -34,9 +37,20 @@ public class BookTicketUI extends BaseUI<BookTicketUIFXMLController>{
 		this.root_pane = root_pane;
 		// Load page
 		this.loadView("fxml/BookTicket.fxml");
+		// prepare Actions
+		this.prepareActions();
 	}
 	
 	protected void prepareActions() {
+		EventHandler<ActionEvent> inputTraininfo = (event)->{
+			// TODO: null is for temporary test
+			System.out.println("startSearch is fired");
+			Order order = this.book_ticket_controller.inputTrainInfo(null);
+			
+			
+		};
 		
+		
+		this.fxml_controller.startSearch.setOnAction(inputTraininfo);
 	}
 }

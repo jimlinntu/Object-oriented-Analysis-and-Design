@@ -14,6 +14,15 @@ public class DataAccessObject {
 		};
 	}
 	
+	public ArrayList<Train> listTrains(){
+		return new ArrayList<Train>(){
+			{
+				add(new Train(1823));
+				add(new Train(1293));
+			}
+		};
+	}
+	
 	public Order getOrder(String userID, String orderID) {
 		Order order = new Order();
 		order.adultTicket = 1;
