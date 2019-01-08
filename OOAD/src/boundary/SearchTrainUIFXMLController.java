@@ -47,6 +47,7 @@ public class SearchTrainUIFXMLController extends BaseFXMLController implements I
     @FXML
     public ComboBox<String> time;
 
+    // disable
     @FXML
     public ComboBox<String> go_or_apart;
 

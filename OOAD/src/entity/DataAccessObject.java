@@ -14,7 +14,7 @@ public class DataAccessObject {
 		};
 	}
 	
-	public ArrayList<Train> listTrains(){
+	public ArrayList<Train> listTrains(Info info){
 		return new ArrayList<Train>(){
 			{
 				add(new Train(1823));

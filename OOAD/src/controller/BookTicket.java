@@ -36,9 +36,8 @@ public class BookTicket {
 	
 
 	public Order inputTrainInfo(Info info) {
-		// TODO: disabled temporarily
-		//order = this.generate_ticket_controller.generate(info) ;
-		order = dao.getOrder("","");
+		order = this.generate_ticket_controller.generate(info) ;
+		//order = dao.getOrder("","");
 				
 		// is it?
 		if (!dao.writeOrder(order)) {

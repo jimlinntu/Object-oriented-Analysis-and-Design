@@ -37,7 +37,7 @@ public class GenerateTicket {
 		// Set up UI interface 
 		this.generate_ticket_ui = new GenerateTicketUI(this, main_page.getRootPane());
 		//
-		ArrayList<Train> train_list = this.dao.listTrains();
+		ArrayList<Train> train_list = this.dao.listTrains(info);
 		// a blocking startInterface function
 		if(train_list.size() == 0) {
 			// there is no train to select

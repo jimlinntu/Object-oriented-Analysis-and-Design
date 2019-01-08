@@ -21,7 +21,7 @@ public class Info {
 	public String origin;
 	public String destination;
 	
-	// one of {"標準車廂", "商務車廂"}
+	// one of {"無", "標準車廂", "商務車廂"}
 	public String cartype;
 	// one of {"無", "靠窗優先", "走到優先"}
 	public String seattype;
