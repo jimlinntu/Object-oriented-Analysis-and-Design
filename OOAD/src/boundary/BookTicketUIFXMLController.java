@@ -21,15 +21,15 @@ public class BookTicketUIFXMLController extends BaseFXMLController implements In
 	
 	@FXML
 	AnchorPane pane;
-
+	
+	@FXML
+	TextField userID;
+	
     @FXML
     ComboBox<String> origin;
 
     @FXML
     ComboBox<String> dest;
-
-    @FXML
-    Label timeLabel;
 
     @FXML
     RadioButton standard;
@@ -101,10 +101,7 @@ public class BookTicketUIFXMLController extends BaseFXMLController implements In
     ComboBox<Integer> seniorTicket;
 
     @FXML
-    CheckBox OnlyshowEarly;
-
-    @FXML
-    Label goLabel;
+    CheckBox onlyShowEarly;
 
     @FXML
     Label backLabel;
@@ -113,10 +110,10 @@ public class BookTicketUIFXMLController extends BaseFXMLController implements In
     Button startSearch;
 
     @FXML
-    Label trainIDLabel;
-
+    TextField goTrainID;
+    
     @FXML
-    TextField trainID;
+    TextField backTrainID;
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -129,6 +126,9 @@ public class BookTicketUIFXMLController extends BaseFXMLController implements In
         this.initializeTicketNum(childTicket);
         this.initializeTicketNum(disableTicket);
         this.initializeTicketNum(seniorTicket);
+        //
+        this.initializeTime(goTime);
+        this.initializeTime(backTime);
     }
     
     // switch between booking tickets by time or train_id
@@ -151,12 +151,15 @@ public class BookTicketUIFXMLController extends BaseFXMLController implements In
     	this.backTime.setDisable(!showBuyBack);
     	this.backLabel.setDisable(!showBuyBack);
     	this.leaveLabel2.setDisable(!showBuyBack);
+    	this.backTrainID.setDisable(!showBuyBack);
     }
     
     void initializeTicketNum(ComboBox<Integer> combobox) {
 		Integer[] ticket_ints = IntStream.rangeClosed(0, 10).boxed().toArray(Integer[]::new);
 		ObservableList<Integer> ticket_nums = FXCollections.observableArrayList(ticket_ints);
 		combobox.setItems(ticket_nums);
+		// set default value to 0 for every ticket num
+		combobox.getSelectionModel().selectFirst();
 	}
 
     

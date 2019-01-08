@@ -50,11 +50,13 @@ public class BookTicket {
 	}
 	
 	public void confirmOrder() {
+		System.out.println("[*] Order confirmed.");
 		return ;
 	}
 	
 	public void rejectOrder() {
 		order.release() ;
+		System.out.println("[*] Order cancelled.");
 	}
 	
 	public void goToMenu() {

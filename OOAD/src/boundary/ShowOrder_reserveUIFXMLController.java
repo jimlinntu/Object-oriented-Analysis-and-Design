@@ -78,6 +78,10 @@ public class ShowOrder_reserveUIFXMLController extends BaseFXMLController implem
     @FXML
     protected Button revise;
     
+    // Declared in ShowOrder-result.fxml, used for displaying order status (確認刪除. 確認成功. 修改成功. etc.).
+    @FXML
+    protected Label result;
+    
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
         System.out.println(this.getClass().toString() + " loaded!");
@@ -102,5 +106,10 @@ public class ShowOrder_reserveUIFXMLController extends BaseFXMLController implem
 			seats.add(t.seat);
 		}
 		this.seats.setItems(FXCollections.observableArrayList(seats));
+    }
+    
+    public void setResultText(String result) {
+    	System.out.println(this.result);
+    	this.result.setText(result);
     }
 }
