@@ -37,6 +37,16 @@ public class GenerateTicketUI extends BaseUI<GenerateTicketUIFXMLController>{
 		// Set 確認車次 button
 		ButtonType confirm = new ButtonType("確認車次", ButtonData.OK_DONE);
 		this.dialog.getDialogPane().getButtonTypes().add(confirm);
+		Node confirm_button = this.dialog.getDialogPane().lookupButton(confirm);
+		confirm_button.setDisable(true);
+		// Listen if a listview is choosen
+		this.fxml_controller.listview.getSelectionModel().
+			selectedItemProperty().addListener((observable, oldSelection, newSelection)->{
+			if(newSelection != null) {
+				confirm_button.setDisable(false);
+			}
+		});
+		
 		// Custom Result Converter
 		this.dialog.setResultConverter(dialogButton ->{
 			if(dialogButton == confirm) {
@@ -64,13 +74,7 @@ public class GenerateTicketUI extends BaseUI<GenerateTicketUIFXMLController>{
 		// Set available train list 
 		this.fxml_controller.listview.setItems(FXCollections.observableArrayList(train_stringlist));
 		
-		Optional<Integer> result = null;
-		while(true) {
-			result = this.dialog.showAndWait();
-			if(result != null && result.isPresent()) {
-				break;
-			}
-		}
+		Optional<Integer> result = this.dialog.showAndWait();
 		
 		return result.get(); 
 	}
