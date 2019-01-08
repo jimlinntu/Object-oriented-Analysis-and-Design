@@ -48,4 +48,9 @@ public class DataAccessObject {
 		order.ticketList = tickets;
 		return order;
 	}
+	
+	// dull function
+	public boolean writeOrder(Order order) {
+		return true;
+	}
 }

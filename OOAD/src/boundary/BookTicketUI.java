@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.*;
 import javafx.collections.*;
@@ -15,18 +16,17 @@ import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.stage.*;
+import javafx.event.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+
 
 public class BookTicketUI extends BaseUI<BookTicketUIFXMLController>{
 	private BookTicket book_ticket_controller;
@@ -42,9 +42,22 @@ public class BookTicketUI extends BaseUI<BookTicketUIFXMLController>{
 	}
 	
 	protected void prepareActions() {
+
 		EventHandler<ActionEvent> inputTraininfo = (event)->{
-			// TODO: null is for temporary test
+			
 			System.out.println("startSearch is fired");
+			
+			/*public class Info {
+				public int userID;
+				public int ticket_num;
+				public int trainID;
+				public int date;
+				public String origin;
+				public String destination;
+				public String type;
+				public double discount;
+			}*/
+			// TODO: null is for temporary test
 			Order order = this.book_ticket_controller.inputTrainInfo(null);
 			
 			
@@ -52,5 +65,13 @@ public class BookTicketUI extends BaseUI<BookTicketUIFXMLController>{
 		
 		
 		this.fxml_controller.startSearch.setOnAction(inputTraininfo);
+		
+		
+	}
+	
+	public boolean showOrder(Order order) {
+		this.loadView("fxml/ShowOrder_reserve.fxml");
+		
+		return true;
 	}
 }

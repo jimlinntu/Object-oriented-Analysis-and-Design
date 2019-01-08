@@ -8,65 +8,116 @@ import java.util.stream.IntStream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 
 public class BookTicketUIFXMLController extends BaseFXMLController implements Initializable {
 	@FXML
-	public MenuItem goToMenu;
+    MenuItem goToMenu;
+	
+	@FXML
+	AnchorPane pane;
+
     @FXML
-    public ComboBox<String> origin;
+    ComboBox<String> origin;
+
     @FXML
-    public ComboBox<String> dest;
+    ComboBox<String> dest;
+
     @FXML
-    public RadioButton standard;
+    Label timeLabel;
+
     @FXML
-    public ToggleGroup cartype;
+    RadioButton standard;
+
     @FXML
-    public RadioButton business;
+    ToggleGroup cartype;
+
     @FXML
-    public RadioButton none_pref;
+    RadioButton business;
+
     @FXML
-    public ToggleGroup seattype;
+    RadioButton none_pref;
+
     @FXML
-    public RadioButton window_seat;
+    ToggleGroup seattype;
+
     @FXML
-    public RadioButton aisle_seat;
+    RadioButton window_seat;
+
     @FXML
-    public RadioButton timeBook;
+    RadioButton aisle_seat;
+    
     @FXML
-    public ToggleGroup booktype;
+    Pane timeBookPane;
+    
     @FXML
-    public RadioButton idBook;
+    Pane idBookPane;
+
     @FXML
-    public DatePicker goDate;
+    RadioButton timeBook;
+
     @FXML
-    public CheckBox buyBack;
+    ToggleGroup booktype;
+
     @FXML
-    public ComboBox<String> goTime;
+    RadioButton idBook;
+
     @FXML
-    public DatePicker backDate;
+    DatePicker goDate;
+
     @FXML
-    public ComboBox<String> backTime;
+    CheckBox buyBack;
+
     @FXML
-    public ComboBox<Integer> adultTicket;
+    ComboBox<String> goTime;
+
     @FXML
-    public ComboBox<Integer> childTicket;
+    Label leaveLabel1;
+
     @FXML
-    public ComboBox<Integer> disableTicket;
+    DatePicker backDate;
+
     @FXML
-    public ComboBox<Integer> seniorTicket;
+    ComboBox<String> backTime;
+
     @FXML
-    public CheckBox OnlyshowEarly;
+    Label leaveLabel2;
+
     @FXML
-    public Button startSearch;
+    ComboBox<Integer> adultTicket;
+
+    @FXML
+    ComboBox<Integer> childTicket;
+
+    @FXML
+    ComboBox<Integer> disableTicket;
+
+    @FXML
+    ComboBox<Integer> seniorTicket;
+
+    @FXML
+    CheckBox OnlyshowEarly;
+
+    @FXML
+    Label goLabel;
+
+    @FXML
+    Label backLabel;
+
+    @FXML
+    Button startSearch;
+
+    @FXML
+    Label trainIDLabel;
+
+    @FXML
+    TextField trainID;
+    
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
         System.out.println(this.getClass().toString() + " loaded!");
@@ -80,9 +131,34 @@ public class BookTicketUIFXMLController extends BaseFXMLController implements In
         this.initializeTicketNum(seniorTicket);
     }
     
-    private void initializeTicketNum(ComboBox<Integer> combobox) {
+    // switch between booking tickets by time or train_id
+    @FXML
+    void changeBookType(ActionEvent event) {
+		boolean isTimeBook = this.timeBook.isSelected();
+		System.out.println("function changeBookType: " + Boolean.toString(isTimeBook));
+		
+		this.timeBookPane.setVisible(isTimeBook);
+		this.idBookPane.setVisible(!isTimeBook);
+    };
+    
+    // show buy back option or not
+    @FXML
+    void changeBuyBack(ActionEvent event) {
+    	boolean showBuyBack = this.buyBack.isSelected();
+    	System.out.println("function changeBuyBack: " + Boolean.toString(showBuyBack));
+    	
+    	this.backDate.setDisable(!showBuyBack);
+    	this.backTime.setDisable(!showBuyBack);
+    	this.backLabel.setDisable(!showBuyBack);
+    	this.leaveLabel2.setDisable(!showBuyBack);
+    }
+    
+    void initializeTicketNum(ComboBox<Integer> combobox) {
 		Integer[] ticket_ints = IntStream.rangeClosed(0, 10).boxed().toArray(Integer[]::new);
 		ObservableList<Integer> ticket_nums = FXCollections.observableArrayList(ticket_ints);
 		combobox.setItems(ticket_nums);
 	}
+
+    
+    
 }

@@ -1,5 +1,8 @@
 package boundary;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -68,5 +71,9 @@ public class ShowOrder_reserveUIFXMLController extends BaseFXMLController {
 
     @FXML
     protected Button revise;
-
+    
+    @Override
+	public void initialize(URL location, ResourceBundle resources) {
+        System.out.println(this.getClass().toString() + " loaded!");
+    }
 }

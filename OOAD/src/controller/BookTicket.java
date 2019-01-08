@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import boundary.MainPage; 
 import boundary.BookTicketUI;
 import controller.GenerateTicket;
-import entity.Ticket;
-import entity.DataAccessObject;
-import entity.Info;
-import entity.Order;
+import entity.*;
 import javafx.stage.*;
 import javafx.collections.FXCollections;
 import javafx.scene.*;
@@ -20,9 +17,8 @@ public class BookTicket {
 	
 	private MainPage main_page;
 	private BookTicketUI book_ticket_ui;
-	//private DAO data_object ;
 	private GenerateTicket generate_ticket_controller ;
-	//private Order order ;
+	private Order order ;
 	private DataAccessObject dao;
 	
 	public BookTicket(MainPage main_page, DataAccessObject dao) {
@@ -37,13 +33,15 @@ public class BookTicket {
 		}
 	}
 	
+
 	public Order inputTrainInfo(Info info) {
-		Order order = this.generate_ticket_controller.generate(info) ;
-		
+		order = this.generate_ticket_controller.generate(info) ;
+				
 		// is it?
-		//data_object.writeOrder(order) ;
-		
-		//book_ticket_ui.showOrder(order) ;
+		if (!dao.writeOrder(order)) {
+			this.error("Insert order to database");
+		} ;
+
 		System.out.println(order);
 		return order;
 	}
@@ -58,5 +56,10 @@ public class BookTicket {
 	
 	public void goToMenu() {
 		this.main_page.goToMenu();
+	}
+	
+	public void error(String error_message) {
+		System.out.println("Fail: " + error_message);
+		goToMenu();
 	}
 }

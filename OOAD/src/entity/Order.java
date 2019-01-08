@@ -17,6 +17,10 @@ public class Order {
 	public ArrayList<Ticket> ticketList;
 	
 	public Order() {
-		
+	}	
+
+	// TODO: dull function
+	public boolean release() {
+		return true;
 	}
 }
