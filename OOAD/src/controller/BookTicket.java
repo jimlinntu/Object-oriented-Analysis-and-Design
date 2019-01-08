@@ -44,6 +44,7 @@ public class BookTicket {
 		//data_object.writeOrder(order) ;
 		
 		//book_ticket_ui.showOrder(order) ;
+		System.out.println(order);
 		return order;
 	}
 	

@@ -25,7 +25,6 @@ public class GenerateTicket {
 	
 	public GenerateTicket(MainPage main_page, DataAccessObject dao) {
 		this.main_page = main_page;
-		this.generate_ticket_ui = new GenerateTicketUI(this, main_page.getRootPane());
 		this.dao = dao;
 	}
 	/**
@@ -35,16 +34,20 @@ public class GenerateTicket {
 	 * @return Order
 	 */
 	public Order generate(Info info) {
+		// Set up UI interface 
+		this.generate_ticket_ui = new GenerateTicketUI(this, main_page.getRootPane());
+		//
 		ArrayList<Train> train_list = this.dao.listTrains();
 		// a blocking startInterface function
 		if(train_list.size() == 0) {
 			// there is no train to select
-			return null;
+			return null; 
 		}else {
 			int trainID = this.generate_ticket_ui.selectTrain(train_list);
 			// 
 			System.out.println("你選擇了: " + trainID + "車次");
-			return null; //
+			// TODO: Get train
+			return null; // TODO: Fix it
 		}
 	}
 	public boolean inputTrainID(int train_id) {
