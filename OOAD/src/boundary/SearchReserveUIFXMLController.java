@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
-public class SearchReserveUIFXMLController implements Initializable{
+public class SearchReserveUIFXMLController extends BaseFXMLController implements Initializable{
 
     @FXML
     protected MenuItem searchTrainItem;

@@ -2,7 +2,6 @@ package controller;
 
 import boundary.MainPage;
 import boundary.SearchReserveUI;
-import controller.ShowOrder;
 import entity.DataAccessObject;
 import entity.Order;
 
@@ -23,8 +22,23 @@ public class SearchReserve {
 		}
 	}
 	
-	public void searchOrder(String userID, String orderID) {
-		ShowOrder show = new ShowOrder(this.main_page, this.dao, this.dao.getOrder(userID, orderID));
-		return;
+	public Order searchOrder(String userID, String orderID) {
+		Order order = this.dao.getOrder(userID, orderID);
+		return order;
+	}
+	public void goToMenu() {
+		this.main_page.goToMenu();
+	}
+	public boolean releaseOrder(Order order) {
+		// release order and discard from DB
+		if(order.release()) {
+			return true;
+		}
+		return false;
+	}
+	public boolean reviseOrder(Order order) {
+		ReviseReserve revise_reserve_controller = new ReviseReserve(this.main_page, this.dao);
+		revise_reserve_controller.showFixedInfo(order);
+		return true;
 	}
 }
