@@ -98,7 +98,7 @@ public class BookTicketUI extends BaseUI<BaseFXMLController>{
 	public boolean showOrder(Order order) {
 		this.loadView("fxml/ShowOrder_reserve.fxml");
 		
-		ShowOrder_reserveUIFXMLController tmp = (ShowOrder_reserveUIFXMLController)this.fxml_controller;
+		ShowOrderUIFXMLController tmp = (ShowOrderUIFXMLController)this.fxml_controller;
 		tmp.setOrder(order);
 		// 把「修改」改成「取消」
 		tmp.revise.setText("取消");
@@ -113,7 +113,7 @@ public class BookTicketUI extends BaseUI<BaseFXMLController>{
 		EventHandler<ActionEvent> confirmOrder = (event) -> {
 			this.book_ticket_controller.confirmOrder();
 			this.loadView("fxml/ShowOrder-result.fxml");
-			((ShowOrder_reserveUIFXMLController)this.fxml_controller).setResultText("訂單確認成功！");
+			((ShowOrderUIFXMLController)this.fxml_controller).setResultText("訂單確認成功！");
 			this.startInterface();
 		};
 		tmp.confirm.setOnAction(confirmOrder);
@@ -121,7 +121,7 @@ public class BookTicketUI extends BaseUI<BaseFXMLController>{
 		EventHandler<ActionEvent> rejectOrder = (event) -> {
 			this.book_ticket_controller.rejectOrder();
 			this.loadView("fxml/ShowOrder-result.fxml");
-			((ShowOrder_reserveUIFXMLController)this.fxml_controller).setResultText("訂單取消！");
+			((ShowOrderUIFXMLController)this.fxml_controller).setResultText("訂單取消！");
 			this.startInterface();
 		};
 		tmp.revise.setOnAction(rejectOrder);

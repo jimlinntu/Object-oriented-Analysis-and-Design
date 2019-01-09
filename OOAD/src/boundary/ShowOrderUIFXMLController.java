@@ -16,7 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import entity.Order;
 import entity.Ticket;
 
-public class ShowOrder_reserveUIFXMLController extends BaseFXMLController implements Initializable{
+public class ShowOrderUIFXMLController extends BaseFXMLController implements Initializable{
 
     @FXML
     protected MenuItem searchTrainItem;
