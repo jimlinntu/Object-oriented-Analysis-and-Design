@@ -96,7 +96,7 @@ public class BookTicketUI extends BaseUI<BaseFXMLController>{
 	}
 	
 	public boolean showOrder(Order order) {
-		this.loadView("fxml/ShowOrder_reserve.fxml");
+		this.loadView("fxml/ShowOrder.fxml");
 		
 		ShowOrderUIFXMLController tmp = (ShowOrderUIFXMLController)this.fxml_controller;
 		tmp.setOrder(order);
