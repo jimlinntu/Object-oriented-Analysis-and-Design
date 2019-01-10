@@ -123,8 +123,8 @@ public class BookTicketUI extends BaseUI<BaseFXMLController>{
 			
 			System.out.println("inputTrainInfo is fired");
 			
-			//String errorMessage = this.checkIfValid(tmp);
-			String errorMessage = null;
+			String errorMessage = this.checkIfValid(tmp);
+			//String errorMessage = null;
 			if (errorMessage == null) {
 				tmp.errorMessage.setVisible(false);
 				

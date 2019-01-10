@@ -43,6 +43,7 @@
             <ComboBox fx:id="go_or_apart" layoutX="379.0" layoutY="225.0" prefHeight="27.0" prefWidth="76.0" visible="false" />
             <Button fx:id="search" layoutX="291.0" layoutY="288.0" mnemonicParsing="false" text="立即查詢" />
             <Label layoutX="428.0" layoutY="230.0" text="出發" />
+            <Label fx:id="errorMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="417.0" layoutY="293.0" prefHeight="17.0" prefWidth="196.0" text="錯誤訊息" textFill="#db3232" visible="false" />
          </children></AnchorPane>
   </children>
 </VBox>

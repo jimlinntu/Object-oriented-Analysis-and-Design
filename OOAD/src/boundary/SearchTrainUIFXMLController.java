@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 
@@ -53,6 +54,9 @@ public class SearchTrainUIFXMLController extends BaseFXMLController implements I
 
     @FXML
     public Button search;
+    
+    @FXML
+    public Label errorMessage;
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
