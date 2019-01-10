@@ -24,7 +24,13 @@ public abstract class BaseUI<T> {
 		// Insert ServiceAnchorPane
 		this.root_pane.getChildren().add(this.service_pane);
 	}
-	
+	/**
+	 * @author jimlin
+	 * This function will load fxml file into:
+	 * 1. this.service_pane
+	 * 2. this.fxml_controller
+	 * 
+	 */
 	public void loadView(String fxml_file) {
 		// Load fxml
 		FXMLLoader fxmlloader = new FXMLLoader();
