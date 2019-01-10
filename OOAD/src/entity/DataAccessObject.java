@@ -15,7 +15,10 @@ public class DataAccessObject {
 			}
 		};
 	}
-	
+	/**
+	 *  @param Info
+	 *  @return ArrayList<Train> (All available train)
+	 */
 	public ArrayList<Train> listTrains(Info info){
 		return new ArrayList<Train>(){
 			{

@@ -5,6 +5,7 @@ package controller;
 
 import entity.*;
 import javafx.scene.control.Dialog;
+import javafx.util.Pair;
 import boundary.GenerateTicketUI;
 import boundary.MainPage;
 import boundary.SearchBookIDUI;
@@ -32,22 +33,27 @@ public class GenerateTicket {
 	 * This function will change ServiceAnchorPane and let
 	 * user select which train it want to take.
 	 * @author jimlin
-	 * @return Order
+	 * @return Pair<Order, String(Error Message)>
 	 */
 	public Pair<Order, String> generate(Info info) {
 		// Set up UI interface 
 		this.generate_ticket_ui = new GenerateTicketUI(this, main_page.getRootPane());
-		//
-		ArrayList<Train> train_list = this.dao.listTrains(info);
+		// 
+		List<TrainTime> train_time = this.dao.listTrains(info);
 		// a blocking startInterface function
 		if(train_list.size() == 0) {
 			// there is no train to select
-			return null; 
+			return new Pair<Order, String>(null, "目前沒有車次符合您的需求"); 
 		}else {
-			int trainID = this.generate_ticket_ui.selectTrain(train_list);
-			// 
+			// Let user choose which train he wants
+			Train selectedTrain = this.generate_ticket_ui.selectTrain(train_time[0].trainId);
 			System.out.println("你選擇了: " + trainID + "車次");
-			// TODO: Get train
+			// Let user confirm
+			List<Seat> seat_list = this.dao.getAvailableSeat(selectedTrain);
+			List<Ticket> ticket_list = new //
+			ticket
+			Order order = new Order(); //
+			
 			return null; // TODO: Fix it
 		}
 	}

@@ -65,8 +65,9 @@ public class GenerateTicketUI extends BaseUI<GenerateTicketUIFXMLController>{
 	/** 
 	 * This inputTrainID function is a blocking Dialog, which wait for user select train id.
 	 * @author jimlin
+	 * @return Train(The reference of which train it choose)
 	 */
-	public int selectTrain(ArrayList<Train> train_list) {
+	public Train selectTrain(ArrayList<Train> train_list) {
 		ArrayList<String> train_stringlist = new ArrayList<String>(train_list.size());
 		for(Train train: train_list) {
 			train_stringlist.add(train.toString());
@@ -75,8 +76,17 @@ public class GenerateTicketUI extends BaseUI<GenerateTicketUIFXMLController>{
 		this.fxml_controller.listview.setItems(FXCollections.observableArrayList(train_stringlist));
 		
 		Optional<Integer> result = this.dialog.showAndWait();
+		// 
+		String selectedTrainString = result.get();
+		Train selectedTrain = null;
+		for(Train train: train_list) {
+			if(train.toString() == selectedTrainString) {
+				selectedTrain = train;
+				break
+			}
+		}
 		
-		return result.get(); 
+		return selectedTrain; 
 	}
 	
 	protected void prepareActions() {
