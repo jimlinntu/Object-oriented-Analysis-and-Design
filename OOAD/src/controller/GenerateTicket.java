@@ -10,6 +10,7 @@ import boundary.MainPage;
 import boundary.SearchBookIDUI;
 
 import java.util.*;
+import javafx.util.Pair;
 
 
 
@@ -33,7 +34,7 @@ public class GenerateTicket {
 	 * @author jimlin
 	 * @return Order
 	 */
-	public Order generate(Info info) {
+	public Pair<Order, String> generate(Info info) {
 		// Set up UI interface 
 		this.generate_ticket_ui = new GenerateTicketUI(this, main_page.getRootPane());
 		//

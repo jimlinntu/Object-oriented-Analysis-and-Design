@@ -12,6 +12,7 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.collections.*;
+import javafx.util.Pair;
 
 public class BookTicket {
 	
@@ -35,17 +36,19 @@ public class BookTicket {
 	}
 	
 
-	public Order inputTrainInfo(Info info) {
-		order = this.generate_ticket_controller.generate(info) ;
-//		order = dao.getOrder("","");
-				
-		// is it?
-		if (!dao.writeOrder(order)) {
-			this.error("Insert order to database");
-		} ;
+	public Pair<Order, String> inputTrainInfo(Info info) {
+		Pair<Order, String> ret = this.generate_ticket_controller.generate(info) ;
+		Order order = ret.getKey();
+		// or empty string?
+		if (order != null) {
+			if (!dao.writeOrder(order)) {
+				this.error("Insert order to database");
+			} ;
 
-		System.out.println(order);
-		return order;
+			System.out.println(order);
+		}
+		
+		return ret;
 	}
 	
 	public void confirmOrder() {

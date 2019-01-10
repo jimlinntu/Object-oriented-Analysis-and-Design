@@ -25,7 +25,7 @@ public class SearchTrainUI extends BaseUI<SearchTrainUIFXMLController>{
 		this.loadView("fxml/SearchTrain.fxml");
 	}
 	
-	private void showTrains() {
+	private void showTrains(ArrayList<Train> trains) {
 		//this.loadView("fxml/");
 	}
 	

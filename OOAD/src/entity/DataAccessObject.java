@@ -1,5 +1,7 @@
 package entity;
 import java.util.*;
+import java.time.LocalDate;
+
 import entity.Order;
 import entity.Ticket;
 
@@ -17,8 +19,8 @@ public class DataAccessObject {
 	public ArrayList<Train> listTrains(Info info){
 		return new ArrayList<Train>(){
 			{
-				add(new Train(1823));
-				add(new Train(1293));
+				add(new Train(1823, LocalDate.of(2019, 2, 3)));
+				add(new Train(1293, LocalDate.of(2019, 2, 5)));
 			}
 		};
 	}

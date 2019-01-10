@@ -8,6 +8,9 @@ public class Order {
     Order(List<Ticket> tickets, String userId, String orderId) {
         this.tickets = tickets;
         this.userId = userId;
-        this.urderId = orderId;
+        this.orderId = orderId;
+    }
+    public Order() {
+    	
     }
 }

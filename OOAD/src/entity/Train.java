@@ -1,5 +1,7 @@
 package entity;
 
+import java.time.LocalDate;
+
 public class Train {
     int trainId;
     LocalDate date;

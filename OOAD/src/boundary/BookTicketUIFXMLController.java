@@ -115,6 +115,9 @@ public class BookTicketUIFXMLController extends BaseFXMLController implements In
     @FXML
     TextField backTrainID;
     
+    @FXML
+    Label errorMessage;
+    
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
         System.out.println(this.getClass().toString() + " loaded!");
