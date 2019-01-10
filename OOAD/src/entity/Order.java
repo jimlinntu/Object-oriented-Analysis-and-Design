@@ -1,26 +1,13 @@
 package entity;
-
-import java.util.ArrayList;
+import java.util.* ;
 
 public class Order {
-	public String orderID;
-	public String userID;
-	public String origin;
-	public String dest;
-	public String goTime;
-	public String arriveTime;
-	public int adultTicket;
-	public int childTicket;
-	public int disableTicket;
-	public int seniorTicket;
-	public int price;
-	public ArrayList<Ticket> ticketList;
-	
-	public Order() {
-	}	
-
-	// TODO: dull function
-	public boolean release() {
-		return true;
-	}
+    List<Ticket> tickets;
+    String userId;
+    String orderId;
+    Order(List<Ticket> tickets, String userId, String orderId) {
+        this.tickets = tickets;
+        this.userId = userId;
+        this.urderId = orderId;
+    }
 }

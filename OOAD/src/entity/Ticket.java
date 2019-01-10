@@ -1,17 +1,14 @@
 package entity;
 
 public class Ticket {
-
-	public String seat;
-	public Ticket(String seat) {
-		// Lock seat
-//		seat.lockSeat();
-		this.seat = seat;
-		
-	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+    Seat seat;
+    int from;
+    int to;
+    String type;
+    Ticket(Seat seat, int from, int to, String type) {
+        this.seat = seat;
+        this.sour = sour;
+        this.dest = dest;
+        this.type = type;
+    }
 }
