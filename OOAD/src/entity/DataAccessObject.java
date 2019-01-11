@@ -158,12 +158,93 @@ public class DataAccessObject {
         order.orderId = rs.getInt(1);
 
         pstmt = connection.prepareStatement(
-            "UNLOCK TABLES " + 
-            ";");
+                "UNLOCK TABLES " + 
+                ";");
         pstmt.execute();
 		return true;
 	}
+    public static boolean removeOrder( int orderId ) throws Exception {
+        PreparedStatement pstmt = connection.prepareStatement(
+                "LOCK TABLES Orders WRITE, Tickets WRITE " + 
+                ";");
+        pstmt.execute();
+        pstmt = connection.prepareStatement(
+                "DELETE FROM Tickets WHERE OrderId = ? " +
+                ";");
+        pstmt.setInt(1,orderId);
+        pstmt.execute();
+        pstmt = connection.prepareStatement(
+                "DELETE FROM Orders WHERE OrderId = ? " +
+                ";");
+        pstmt.setInt(1,orderId);
+        pstmt.execute();
+        pstmt = connection.prepareStatement(
+                "UNLOCK TABLES " + 
+                ";");
+        pstmt.execute();
+        return true;
+    }
+    public static boolean removeOrder(Order order) throws Exception {
+        return removeOrder(order.orderId);
+    }
+    public static boolean changeOrder(Order order) throws Exception {
+        PreparedStatement pstmt = connection.prepareStatement(
+                "LOCK TABLES Orders WRITE, Tickets WRITE " + 
+                ";");
 
+        pstmt.execute();
+
+        pstmt = connection.prepareStatement(
+                "SELECT SeatId FROM Tickets " +
+                "WHERE TrainId = ? AND Date = ? AND SeatId = ? " +
+                "AND FromStation < ? AND ToStation > ? " +
+                "LIMIT 1 " +
+                ";");
+
+        ResultSet rs;
+
+        for( Ticket it:order.tickets ) {
+            pstmt.setInt(1,it.seat.train.trainId);
+            pstmt.setString(2,it.seat.train.date.toString());
+            pstmt.setString(3,it.seat.seatId);
+            pstmt.setInt(4,it.to);
+            pstmt.setInt(5,it.from);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                pstmt = connection.prepareStatement(
+                    "UNLOCK TABLES " + 
+                    ";");
+                pstmt.execute();
+                return false;
+            }
+        }
+
+        pstmt = connection.prepareStatement(
+                "DELETE FROM Tickets WHERE OrderId = ? " +
+                ";");
+        pstmt.setInt(1,order.orderId);
+        pstmt.execute();
+
+        pstmt = connection.prepareStatement(
+                "INSERT INTO Tickets VALUE (?,?,?,?,?,?,?) " +
+                ";" );
+        for( Ticket it:order.tickets ) {
+            pstmt.setInt(1,order.orderId);
+            pstmt.setInt(2,it.seat.train.trainId);
+            pstmt.setString(3,it.seat.train.date.toString());
+            pstmt.setString(4,it.seat.seatId);
+            pstmt.setInt(5,it.from);
+            pstmt.setInt(6,it.to);
+            pstmt.setInt(7,it.type);
+            pstmt.execute();
+        }
+
+        pstmt = connection.prepareStatement(
+                "UNLOCK TABLES " + 
+                ";");
+        pstmt.execute();
+        return true;
+    }
     /**
      * test
      */
@@ -193,6 +274,17 @@ public class DataAccessObject {
                 System.out.printf("%d %s %s %d %d %d\n",it.seat.train.trainId,it.seat.train.date,
                         it.seat.seatId,it.from,it.to,it.type);
             }
+            order.tickets.get(0).seat.seatId = "5";
+            order.tickets.get(1).seat.seatId = "6";
+            if(changeOrder(order)) {
+                order = getOrder(order.orderId);
+                System.out.printf("%d %s\n",order.orderId,order.userId);
+                for( Ticket it:order.tickets ) {
+                    System.out.printf("%d %s %s %d %d %d\n",it.seat.train.trainId,it.seat.train.date,
+                            it.seat.seatId,it.from,it.to,it.type);
+                }
+            }
+            removeOrder(order);
         }
     }
 }
