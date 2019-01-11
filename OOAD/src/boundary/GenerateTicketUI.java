@@ -67,7 +67,7 @@ public class GenerateTicketUI extends BaseUI<GenerateTicketUIFXMLController>{
 	 * @author jimlin
 	 * @return Train(The reference of which train it choose)
 	 */
-	public Train selectTrain(ArrayList<Train> train_list) {
+	public Train selectTrain(List<TrainTime> train_times) {
 		ArrayList<String> train_stringlist = new ArrayList<String>(train_list.size());
 		for(Train train: train_list) {
 			train_stringlist.add(train.toString());

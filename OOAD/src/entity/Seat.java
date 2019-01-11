@@ -1,8 +1,9 @@
 package entity;
 
 public class Seat {
-    Train train;
-    String seatId;
+    public Train train;
+    public String seatId;
+    public CarType carType;
     Seat(Train train, String seatId) {
         this.train = train;
         this.seatId = seatId;

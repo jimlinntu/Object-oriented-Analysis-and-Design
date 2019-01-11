@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class Info {
 	public String userID;
+	// 0: adult, 1: child, 2: disable, 3: senior
 	public int[] ticketNum;
 
 	// true: goSelector and backSelector are "time"
@@ -21,17 +22,16 @@ public class Info {
 	public String origin;
 	public String destination;
 	
-	// one of {"無", "標準車廂", "商務車廂"}
-	public String cartype;
-	// one of {"無", "靠窗優先", "走到優先"}
-	public String seattype;
+	// one of {"標準車廂", "商務車廂"}
+	public CarType cartype;
+	// one of {"無", "靠窗優先", "走道優先"}
+	public SeatType seattype;
 	
 	public boolean onlyShowEarly;
 	
 	public Info(String userID, int[] ticketNum, boolean selectByTime, LocalDate goDate, String goSelector,
 			boolean buyBack, LocalDate backDate, String backSelector,
-			String origin, String destination, String cartype, String seattype, boolean onlyShowEarly) 
-	{
+			String origin, String destination, String cartype, String seattype, boolean onlyShowEarly) {
 		this.userID = userID;
 		this.ticketNum = ticketNum;
 		this.selectByTime = selectByTime;
@@ -46,8 +46,8 @@ public class Info {
 		this.origin = origin;
 		this.destination = origin;
 
-		this.cartype = cartype;
-		this.seattype = seattype;
+		this.cartype = CarType.stringToCarType(cartype);
+		this.seattype = SeatType.stringToSeatType(seattype);
 		
 		this.onlyShowEarly = onlyShowEarly;
 	}
