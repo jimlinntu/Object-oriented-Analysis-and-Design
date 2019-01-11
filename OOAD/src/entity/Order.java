@@ -2,15 +2,12 @@ package entity;
 import java.util.* ;
 
 public class Order {
-    List<Ticket> tickets;
+    int orderId;
     String userId;
-    String orderId;
-    Order(List<Ticket> tickets, String userId, String orderId) {
-        this.tickets = tickets;
-        this.userId = userId;
+    List<Ticket> tickets;
+    Order(int orderId, String userId, List<Ticket> tickets) {
         this.orderId = orderId;
-    }
-    public Order() {
-    	
+        this.userId = userId;
+        this.tickets = tickets;
     }
 }
