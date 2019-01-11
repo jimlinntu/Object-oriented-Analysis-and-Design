@@ -19,7 +19,7 @@ public class DataAccessObject {
 	 *  @param Info
 	 *  @return ArrayList<Train> (All available train)
 	 */
-	public ArrayList<Train> listTrains(Info info){
+	public List<Train> listTrains(Info info){
 		return new ArrayList<Train>(){
 			{
 				add(new Train(1823, LocalDate.of(2019, 2, 3)));

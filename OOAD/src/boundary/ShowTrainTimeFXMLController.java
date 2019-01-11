@@ -1,11 +1,12 @@
 package boundary;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 
-public class GenerateTicketUIFXMLController {
+public class ShowTrainTimeFXMLController {
 	@FXML
     public MenuItem searchTrainItem;
 
@@ -26,5 +27,8 @@ public class GenerateTicketUIFXMLController {
 
     @FXML
     public ListView<String> listview;
+    
+    @FXML
+    public Label message;
 
 }

@@ -15,7 +15,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.layout.Pane;
 
-public class GenerateTicketUI extends BaseUI<GenerateTicketUIFXMLController>{ 
+public class GenerateTicketUI extends BaseUI<ShowTrainTimeFXMLController>{ 
 	private GenerateTicket generate_ticket_controller;
 	private Dialog<Integer> dialog;
 	
@@ -24,7 +24,7 @@ public class GenerateTicketUI extends BaseUI<GenerateTicketUIFXMLController>{
 		this.generate_ticket_controller = generate_ticket_controller;
 		this.root_pane = root_pane;
 		// Load page
-		this.loadView("fxml/GenerateTicket.fxml");
+		this.loadView("fxml/ShowTrainTimeFXMLController.fxml");
 		this.prepareActions();
 		// Set up Dialog
 		this.prepareDialog();
@@ -67,7 +67,11 @@ public class GenerateTicketUI extends BaseUI<GenerateTicketUIFXMLController>{
 	 * @author jimlin
 	 * @return Train(The reference of which train it choose)
 	 */
-	public Train selectTrain(List<TrainTime> train_times) {
+	public TrainTime selectTrain(List<TrainTime> train_times, String message) {
+		// change text
+		assert message == "去程" || message == "回程";
+		this.fxml_controller.message.setText(message);
+		
 		ArrayList<String> train_stringlist = new ArrayList<String>(train_list.size());
 		for(Train train: train_list) {
 			train_stringlist.add(train.toString());
@@ -82,7 +86,7 @@ public class GenerateTicketUI extends BaseUI<GenerateTicketUIFXMLController>{
 		for(Train train: train_list) {
 			if(train.toString() == selectedTrainString) {
 				selectedTrain = train;
-				break
+				break;
 			}
 		}
 		

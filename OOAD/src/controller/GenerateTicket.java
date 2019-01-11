@@ -46,7 +46,8 @@ public class GenerateTicket {
 			return new Pair<Order, String>(null, "目前沒有車次符合您的需求"); 
 		}else {
 			// Let user choose which train he wants
-			Map<String, TrainTime> selectedTrainTime = (Map)this.generate_ticket_ui.selectTrain(train_times);
+			TrainTime selectedTrainTime = this.generate_ticket_ui.selectTrain(train_times.get("go"), "去程");
+			TrainTime backSelectedTrainTime = this.generate_ticket_ui.selectTrain(train_times.get("back"), "回程");
 			System.out.println("你選擇了: " + selectedTrainTime.trainId + "車次");
 			// Get Available Seats(go and back)
 			List<Seat> seat_list = this.dao.getAvailableSeat(selectedTrainTime.get("go"));
