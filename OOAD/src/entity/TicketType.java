@@ -12,7 +12,7 @@ public enum TicketType {
 		this.discount = discount;
 	}
 	/**
-	 * @return discount of a TicketType
+	 * @return discount of a TicketType(ADULT: 0, CHILD: 0.5, DISABLE: 0.5, SENIOR: 0.5)
 	 */
 	public double getDiscount() {
 		return this.discount;
