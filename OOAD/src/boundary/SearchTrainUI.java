@@ -93,9 +93,7 @@ public class SearchTrainUI extends BaseUI<BaseFXMLController>{
 						"無",		// seattype
 						false		// onlyShowEarly?
 						);
-				//List<TrainTime> train_times = search_train_controller.searchTrain(info);
-				List<TrainTime> train_times = new ArrayList<TrainTime>();
-				train_times.add(new TrainTime(1334, LocalDate.of(2019, 3, 24), LocalTime.of(4, 2), LocalTime.of(5, 4)));
+				List<TrainTime> train_times = search_train_controller.searchTrain(info);
 				this.showTrains(train_times);
 			}
 			else {
