@@ -251,10 +251,6 @@ public class DataAccessObject {
     public static List<Seat> getAvailableSeats(TrainTime trainTime){
     	return new ArrayList<Seat>(){
     		{
-    			add(new Seat(new Train(3042, LocalDate.of(2019, 1, 11)), "15A", CarType.BUSINESS));
-    			add(new Seat(new Train(3042, LocalDate.of(2019, 1, 11)), "15A", CarType.BUSINESS));
-    			add(new Seat(new Train(3042, LocalDate.of(2019, 1, 11)), "15A", CarType.BUSINESS));
-    			add(new Seat(new Train(3042, LocalDate.of(2019, 1, 11)), "15A", CarType.BUSINESS));
     		}
     	};
     }

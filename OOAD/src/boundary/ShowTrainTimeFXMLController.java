@@ -1,12 +1,16 @@
 package boundary;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 
-public class ShowTrainTimeFXMLController {
+public class ShowTrainTimeFXMLController extends BaseFXMLController implements Initializable {
 	@FXML
     public MenuItem searchTrainItem;
 
@@ -30,5 +34,9 @@ public class ShowTrainTimeFXMLController {
     
     @FXML
     public Label message;
+    
+    public void initialize(URL location, ResourceBundle resources) {
+    	System.out.println(this.getClass().toString() + " loaded!");
+    }
 
 }

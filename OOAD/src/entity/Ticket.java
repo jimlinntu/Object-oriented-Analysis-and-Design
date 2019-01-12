@@ -52,7 +52,7 @@ public class Ticket {
         // Buy Standard class cabin
         if(this.seat.carType == CarType.STANDARD) {
         	this.cost = this.stdPrice[from][to] * (1 - this.ticketType.getDiscount());
-        }
+        }	
         // Buy Bussiness class cabin
         else if(this.seat.carType == CarType.BUSINESS) {
         	this.cost = this.busPrice[from][to] * (1 - this.ticketType.getDiscount());

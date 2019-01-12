@@ -1,8 +1,8 @@
 package entity;
 
 public enum CarType {
-	// 標準、商務
-	STANDARD(0), BUSINESS(1);
+	// 標準、商務、無(就是指標準和商務都算, 實際上 無 應該只有在查詢時刻表會用到)
+	STANDARD(0), BUSINESS(1), NONE(2);
 	
 	private final int value;
 	private CarType(int value) {
@@ -14,8 +14,11 @@ public enum CarType {
 			return STANDARD;
 		}else if(carTypeString.equals("商務車廂")) {
 			return BUSINESS;
-		}else {
-			throw new RuntimeException("You need to input 標準車廂 or 商務車廂");
+		}else if(carTypeString.equals("無")) {
+			return NONE;
+		}
+		else {
+			throw new RuntimeException("You need to input 標準車廂 or 商務車廂 or 無");
 		}
 	}
 	

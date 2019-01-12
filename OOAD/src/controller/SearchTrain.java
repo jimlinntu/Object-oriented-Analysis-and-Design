@@ -1,12 +1,12 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import boundary.MainPage;
 import boundary.SearchTrainUI;
 import entity.DataAccessObject;
-import entity.Train;
-import entity.Info;
+import entity.*;
 
 
 public class SearchTrain {
@@ -26,7 +26,13 @@ public class SearchTrain {
 		}
 	}
 	
-	public ArrayList<Train> searchTrain(Info info) {
-		return dao.listTrains(info);
+	public List<TrainTime> searchTrain(Info info) {
+		List<TrainTime> train_times = null;
+		try{
+			train_times = DataAccessObject.listTrains(info.goDate, info.from, info.to);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return train_times;
 	}
 }

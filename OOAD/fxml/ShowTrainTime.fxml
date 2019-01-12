@@ -35,7 +35,7 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <ListView fx:id="listview" layoutX="205.0" layoutY="89.0" prefHeight="233.0" prefWidth="230.0" />
-                  <Label fx:id="message" alignment="CENTER" layoutX="257.0" layoutY="33.0" prefHeight="44.0" prefWidth="126.0">
+                  <Label fx:id="message" alignment="CENTER" layoutX="59.0" layoutY="34.0" prefHeight="44.0" prefWidth="523.0">
                      <font>
                         <Font size="23.0" />
                      </font>

@@ -2,21 +2,25 @@ package boundary;
 
 import java.io.FileInputStream;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javafx.fxml.FXMLLoader;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import controller.SearchTrain;
 import entity.Info;
 import entity.Station;
 import entity.Train;
+import entity.TrainTime;
 
-public class SearchTrainUI extends BaseUI<SearchTrainUIFXMLController>{
+public class SearchTrainUI extends BaseUI<BaseFXMLController>{
 	private SearchTrain search_train_controller;
 	
 	public SearchTrainUI(SearchTrain search_train_controller, Pane root_pane) {
@@ -51,40 +55,54 @@ public class SearchTrainUI extends BaseUI<SearchTrainUIFXMLController>{
 		return null;
 	}
 	
-	private void showTrains(ArrayList<Train> trains) {
+	private void showTrains(List<TrainTime> train_times) {
 		// TODO: ShowTrainTimeFXMLController  
-		//this.loadView("fxml/ShowTrainTime");
+		this.loadView("fxml/ShowTrainTime.fxml");
+		ShowTrainTimeFXMLController fxml_controller = (ShowTrainTimeFXMLController)this.fxml_controller;
+		
+		List<String> train_times_string = new ArrayList<String>();
+		for(TrainTime x: train_times) {
+			train_times_string.add(x.toString());
+		}
+		
+		fxml_controller.message.setText("以下是查詢到的列車時刻表");
+		fxml_controller.listview.setItems(FXCollections.observableArrayList(train_times_string));
+		this.startInterface();
 	}
 	
 	protected void prepareActions() {
+		SearchTrainUIFXMLController fxml_controller = (SearchTrainUIFXMLController)this.fxml_controller;
+		
 		EventHandler<ActionEvent> inputSearchInfo = (event) -> {
-			String errorMessage = this.checkIfValid(this.fxml_controller);
+			String errorMessage = this.checkIfValid(fxml_controller);
 			if (errorMessage == null) {
-				this.fxml_controller.errorMessage.setVisible(false);
+				fxml_controller.errorMessage.setVisible(false);
 				int[] ticketNum = {0, 0, 0, 0};
 				Info info = new Info(
 						"",			// userID
 						ticketNum,
 						true,		// use time as selector
-						this.fxml_controller.date.getValue(),
-						this.fxml_controller.time.getValue(),
+						fxml_controller.date.getValue(),
+						fxml_controller.time.getValue(),
 						false,		// buyBack?
-						this.fxml_controller.date.getValue(),
+						null, //backDate should be null
 						"",
-						this.fxml_controller.origin.getValue(),
-						this.fxml_controller.dest.getValue(),
+						fxml_controller.origin.getValue(),
+						fxml_controller.dest.getValue(),
 						"無",		// cartype
 						"無",		// seattype
 						false		// onlyShowEarly?
 						);
-				ArrayList<Train> trains = search_train_controller.searchTrain(info);
-				this.showTrains(trains);
+				//List<TrainTime> train_times = search_train_controller.searchTrain(info);
+				List<TrainTime> train_times = new ArrayList<TrainTime>();
+				train_times.add(new TrainTime(1334, LocalDate.of(2019, 3, 24), LocalTime.of(4, 2), LocalTime.of(5, 4)));
+				this.showTrains(train_times);
 			}
 			else {
-				this.fxml_controller.errorMessage.setText(errorMessage);
-				this.fxml_controller.errorMessage.setVisible(true);
+				fxml_controller.errorMessage.setText(errorMessage);
+				fxml_controller.errorMessage.setVisible(true);
 			}
 		};
-		this.fxml_controller.search.setOnAction(inputSearchInfo);
+		fxml_controller.search.setOnAction(inputSearchInfo);
 	}
 }
