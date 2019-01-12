@@ -1,9 +1,9 @@
 package entity;
 
 public class Ticket {
-    Seat seat;
-    int from;
-    int to;
+    public Seat seat;
+    public int from;
+    public int to;
     double cost;
     TicketType ticketType;
     
@@ -72,6 +72,18 @@ public class Ticket {
     		e.printStackTrace();
     	}
     	return trainTime;
+    }
+    /**
+     * @author jimlin
+     */
+    public double getCost() {
+    	return this.cost;
+    }
+    /**
+     * 
+     */
+    public TicketType getTicketType() {
+    	return this.ticketType;
     }
     
 }

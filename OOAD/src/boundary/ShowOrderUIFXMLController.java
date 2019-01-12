@@ -1,7 +1,9 @@
 package boundary;
 
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -12,8 +14,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
-
+import javafx.util.Pair;
 import entity.Order;
+import entity.Station;
 import entity.Ticket;
 
 public class ShowOrderUIFXMLController extends BaseFXMLController implements Initializable{
@@ -89,21 +92,29 @@ public class ShowOrderUIFXMLController extends BaseFXMLController implements Ini
     
     // used in both SearchReserve and BookTicket use case
     public void setOrder(Order order) {
-    	this.adultTicket.setText(String.valueOf(order.adultTicket));
-		this.childTicket.setText(String.valueOf(order.childTicket));
-		this.disableTicket.setText(String.valueOf(order.disableTicket));
-		this.seniorTicket.setText(String.valueOf(order.seniorTicket));
-		this.price.setText(String.valueOf(order.price));
-		this.origin.setText(order.origin);
-		this.dest.setText(order.dest);
-		this.goTime.setText(order.goTime);
-		this.arriveTime.setText(order.arriveTime);
-		this.orderid.setText(order.orderID);
-		this.userid.setText(order.userID);
+    	int[] ticket_num = order.getTicketNum();
+    	double cost = order.getCost();
+    	Pair<int[], LocalTime[]> pair = order.getFromTo();
+    	int[] fromto = pair.getKey();
+    	LocalTime[] times = pair.getValue();
+    	int from = fromto[0], to = fromto[1];
+    	LocalTime goDepart = times[0], goArrival = times[1];
+    	
+    	this.adultTicket.setText(String.valueOf(ticket_num[0]));
+		this.childTicket.setText(String.valueOf(ticket_num[1]));
+		this.disableTicket.setText(String.valueOf(ticket_num[2]));
+		this.seniorTicket.setText(String.valueOf(ticket_num[3]));
+		this.price.setText(String.valueOf(cost));
+		this.origin.setText(Station.CHI_NAME[from]);
+		this.dest.setText(Station.CHI_NAME[to]);
+		this.goTime.setText(goDepart.toString());
+		this.arriveTime.setText(goArrival.toString());
+		this.orderid.setText(String.valueOf(order.getOrderId()));
+		this.userid.setText(order.getUserId());
 		
-		ArrayList<String>seats = new ArrayList<String>();
-		for(Ticket t : order.ticketList) {
-			seats.add(t.seat);
+		List<String> seats = new ArrayList<String>();
+		for(Ticket t : order.tickets) {
+			seats.add(t.seat.seatId);
 		}
 		this.seats.setItems(FXCollections.observableArrayList(seats));
     }

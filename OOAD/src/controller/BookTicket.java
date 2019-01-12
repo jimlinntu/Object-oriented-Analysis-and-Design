@@ -41,9 +41,16 @@ public class BookTicket {
 		Order order = ret.getKey();
 		// or empty string?
 		if (order != null) {
-			if (!dao.writeOrder(order)) {
+			boolean success = false;
+			try {
+				success = DataAccessObject.writeOrder(order);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			// fail to writeOrder
+			if (success == false) {
 				this.error("Insert order to database");
-			} ;
+			}
 
 			System.out.println(order);
 		}
