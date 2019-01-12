@@ -2,11 +2,11 @@ package entity;
 import java.time.* ;
 
 public class TrainTime {
-    int trainId;
-    LocalDate date;
-    LocalTime fromTime;
-    LocalTime toTime;
-    TrainTime(int trainId, LocalDate date, LocalTime fromTime, LocalTime toTime) {
+    public int trainId;
+    public LocalDate date;
+    public LocalTime fromTime;
+    public LocalTime toTime;
+    public TrainTime(int trainId, LocalDate date, LocalTime fromTime, LocalTime toTime) {
         this.trainId = trainId;
         this.date = date;
         this.fromTime = fromTime;

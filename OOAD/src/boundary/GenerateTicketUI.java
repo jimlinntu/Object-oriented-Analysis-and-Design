@@ -2,10 +2,12 @@ package boundary;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import controller.GenerateTicket;
 import entity.Train;
+import entity.TrainTime;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;

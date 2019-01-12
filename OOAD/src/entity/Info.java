@@ -19,8 +19,8 @@ public class Info {
 	public LocalDate backDate;
 	public String backSelector;
 	
-	public String origin;
-	public String destination;
+	public int from;
+	public int to;
 	
 	// one of {"標準車廂", "商務車廂"}
 	public CarType cartype;
@@ -43,8 +43,8 @@ public class Info {
 		this.backDate = backDate;
 		this.backSelector = backSelector;
 		
-		this.origin = origin;
-		this.destination = origin;
+		this.from = Station.chineseToIndex.get(origin);
+		this.to = Station.chineseToIndex.get(destination);
 
 		this.cartype = CarType.stringToCarType(cartype);
 		this.seattype = SeatType.stringToSeatType(seattype);

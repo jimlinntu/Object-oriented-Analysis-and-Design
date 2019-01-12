@@ -38,22 +38,35 @@ public class GenerateTicket {
 	public Pair<Order, String> generate(Info info) {
 		// Set up UI interface 
 		this.generate_ticket_ui = new GenerateTicketUI(this, main_page.getRootPane());
-		// Get available train times 
-		Map<String, List<TrainTime>> train_times = (Map)this.dao.listTrains(info);
-		// 
-		if(train_times.get("").size() == 0) {
+		// Get available train times (go) 
+		List<TrainTime> train_times = DataAccessObject.listTrains(info.goDate, info.from, info.to);
+		// Get available train times (back)
+		List<TrainTime> backTrain_times = null;
+		if(info.buyBack == true) {
+			backTrain_times = DataAccessObject.listTrains(info.backDate, info.to, info.from); 
+		}
+		// ============================================ DEBUG ============================================
+		
+		// ============================================ DEBUG ============================================
+		if(train_times.size() == 0) {
 			// there is no train to select
-			return new Pair<Order, String>(null, "目前沒有車次符合您的需求"); 
+			return new Pair<Order, String>(null, "目前沒有車次符合您的需求，請更換去程的時間"); 
 		}else {
+			// there is no back train to select
+			if(info.buyBack == true) {
+				if(backTrain_times.size() == 0) {
+					return new Pair<Order, String>(null, "目前沒有回程的車次符合您的需求，請更換回程的時間")
+				}
+			}
 			// Let user choose which train he wants
-			TrainTime selectedTrainTime = this.generate_ticket_ui.selectTrain(train_times.get("go"), "去程");
-			TrainTime backSelectedTrainTime = this.generate_ticket_ui.selectTrain(train_times.get("back"), "回程");
+			TrainTime selectedTrainTime = this.generate_ticket_ui.selectTrain(train_times, "去程");
+			TrainTime backSelectedTrainTime = this.generate_ticket_ui.selectTrain(backTrain_times, "回程");
 			System.out.println("你選擇了: " + selectedTrainTime.trainId + "車次");
 			// Get Available Seats(go and back)
-			List<Seat> seat_list = this.dao.getAvailableSeat(selectedTrainTime.get("go"));
+			List<Seat> seat_list = DataAccessObject.getAvailableSeats(selectedTrainTime);
 			List<Seat> back_seat_list = null;
 			if(info.buyBack == true) {
-				back_seat_list = this.dao.getAvailableSeat(selectedTrainTime.get("back"));
+				back_seat_list = DataAccessObject.getAvailableSeats(backSelectedTrainTime);
 			}
 			List<Seat> candidate_seats = new ArrayList<Seat>();
 			List<Seat> back_candidate_seats = new ArrayList<Seat>();
