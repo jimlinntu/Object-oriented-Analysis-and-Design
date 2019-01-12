@@ -70,7 +70,23 @@ public class GenerateTicket {
 			return new Pair<Order, String>(null, "目前沒有車次符合您的需求，請更換去程的時間"); 
 		}else {
 			// Let user choose which train he wants
-			TrainTime selectedTrainTime = this.generate_ticket_ui.selectTrain(train_times, "去程");
+			
+			TrainTime selectedTrainTime = null;
+			if(info.selectByTime) {
+				selectedTrainTime = this.generate_ticket_ui.selectTrain(train_times, "去程");
+			}else {
+				// goSelector is trainId here (See Info.java)
+				int trainId = Integer.parseInt(info.goSelector) ;
+				for(TrainTime train_time: train_times) {
+					if(train_time.trainId == trainId) {
+						selectedTrainTime = train_time;
+						break;
+					}
+				}
+				if(selectedTrainTime == null) {
+					return new Pair<Order, String>(null, "同學，你是不是打錯 去程 車次號碼了呀？");
+				}
+			}
 			System.out.println("[去程] 你選擇了: " + selectedTrainTime.trainId + "車次");
 			// Get Available Seats(go and back)
 			List<Seat> seat_list = DataAccessObject.getAvailableSeats(selectedTrainTime);
@@ -112,7 +128,24 @@ public class GenerateTicket {
 			if(backTrain_times.size() == 0) {
 				return new Pair<Order, String>(null, "目前沒有回程的車次符合您的需求，請更換回程的時間");
 			}
-			TrainTime backSelectedTrainTime = this.generate_ticket_ui.selectTrain(backTrain_times, "回程");
+			TrainTime backSelectedTrainTime = null;
+			
+			if(info.selectByTime) {
+				backSelectedTrainTime = this.generate_ticket_ui.selectTrain(backTrain_times, "回程");
+			}else {
+				// backSelector is trainId here (See Info.java)
+				int trainId = Integer.parseInt(info.backSelector);
+				for(TrainTime train_time: backTrain_times) {
+					if(train_time.trainId == trainId) {
+						backSelectedTrainTime = train_time;
+						break;
+					}
+				}
+				// If we did not match a train id
+				if(backSelectedTrainTime == null) {
+					return new Pair<Order, String>(null, "同學，你是不是打錯 回程 車次號碼了呀？");
+				}
+			}
 			System.out.println("[回程] 你選擇了" + backSelectedTrainTime.trainId + "車次");
 			List<Seat> back_seat_list = DataAccessObject.getAvailableSeats(backSelectedTrainTime);
 			List<Seat> back_candidate_seats = new ArrayList<Seat>();
