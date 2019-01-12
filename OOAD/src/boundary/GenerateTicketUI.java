@@ -27,7 +27,6 @@ public class GenerateTicketUI extends BaseUI<ShowTrainTimeFXMLController>{
 		this.root_pane = root_pane;
 		// Load page
 		this.loadView("fxml/ShowTrainTimeFXMLController.fxml");
-		this.prepareActions();
 		// Set up Dialog
 		this.prepareDialog();
 	}
@@ -52,11 +51,11 @@ public class GenerateTicketUI extends BaseUI<ShowTrainTimeFXMLController>{
 		// Custom Result Converter
 		this.dialog.setResultConverter(dialogButton ->{
 			if(dialogButton == confirm) {
-				String select_train = this.fxml_controller.listview.getSelectionModel().getSelectedItem();
-				if(select_train == null) {
+				int select_train = this.fxml_controller.listview.getSelectionModel().getSelectedIndex();
+				if(select_train == -1) {
 					return null;
 				}
-				return Integer.parseInt(select_train);
+				return select_train;
 			}
 			else {
 				return null;
@@ -72,30 +71,22 @@ public class GenerateTicketUI extends BaseUI<ShowTrainTimeFXMLController>{
 	public TrainTime selectTrain(List<TrainTime> train_times, String message) {
 		// change text
 		assert message == "去程" || message == "回程";
-		this.fxml_controller.message.setText(message);
+		this.fxml_controller.message.setText("請選擇: " + message);
 		
-		ArrayList<String> train_stringlist = new ArrayList<String>(train_list.size());
-		for(Train train: train_list) {
-			train_stringlist.add(train.toString());
+		List<String> train_stringlist = new ArrayList<String>(train_times.size());
+		for(TrainTime t: train_times) {
+			train_stringlist.add(t.toString());
 		}
 		// Set available train list 
 		this.fxml_controller.listview.setItems(FXCollections.observableArrayList(train_stringlist));
 		
 		Optional<Integer> result = this.dialog.showAndWait();
 		// 
-		String selectedTrainString = result.get();
-		Train selectedTrain = null;
-		for(Train train: train_list) {
-			if(train.toString() == selectedTrainString) {
-				selectedTrain = train;
-				break;
-			}
-		}
-		
-		return selectedTrain; 
+		int selectedTrainTimeIndex = result.get();
+		// train_times[i]
+		return train_times.get(selectedTrainTimeIndex); 
 	}
 	
 	protected void prepareActions() {
 	}
-	
 }

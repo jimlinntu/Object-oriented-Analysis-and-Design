@@ -46,6 +46,7 @@ public class Info {
 		this.from = Station.chineseToIndex.get(origin);
 		this.to = Station.chineseToIndex.get(destination);
 
+		System.out.println(cartype);
 		this.cartype = CarType.stringToCarType(cartype);
 		this.seattype = SeatType.stringToSeatType(seattype);
 		

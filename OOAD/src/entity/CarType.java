@@ -10,9 +10,9 @@ public enum CarType {
 	}
 	
 	static public CarType stringToCarType(String carTypeString) {
-		if(carTypeString == "標準車廂") {
+		if(carTypeString.equals("標準車廂")) {
 			return STANDARD;
-		}else if(carTypeString == "商務車廂") {
+		}else if(carTypeString.equals("商務車廂")) {
 			return BUSINESS;
 		}else {
 			throw new RuntimeException("You need to input 標準車廂 or 商務車廂");

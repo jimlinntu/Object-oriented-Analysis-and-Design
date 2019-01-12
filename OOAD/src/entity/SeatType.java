@@ -10,11 +10,11 @@ public enum SeatType {
 	}
 	
 	static public SeatType stringToSeatType(String seatTypeString) {
-		if(seatTypeString == "無") {
+		if(seatTypeString.equals("無")) {
 			return NONE;
-		}else if(seatTypeString == "靠窗優先") {
+		}else if(seatTypeString.equals("靠窗優先")) {
 			return WINDOW; 
-		}else if(seatTypeString == "走道優先") {
+		}else if(seatTypeString.equals("走道優先")){
 			return AISLE;
 		}else {
 			throw new RuntimeException("You should input 無/靠窗優先/走道優先");

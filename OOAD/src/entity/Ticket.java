@@ -4,17 +4,17 @@ public class Ticket {
     Seat seat;
     int from;
     int to;
-    int type;
+    TicketType ticketType;
     /**
      * @param seat
      * @param from
      * @param to
      * @param type
      */
-    Ticket(Seat seat, int from, int to, int type) {
+    public Ticket(Seat seat, int from, int to, TicketType type) {
         this.seat = seat;
         this.from = from;
         this.to = to;
-        this.type = type;
+        this.ticketType = type;
     }
 }

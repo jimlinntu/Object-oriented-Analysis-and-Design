@@ -143,7 +143,7 @@ public class BookTicketUI extends BaseUI<BaseFXMLController>{
 				String cartype, seattype;
 				cartype = ((RadioButton)(tmp.cartype.getSelectedToggle())).getText();
 				seattype = ((RadioButton)(tmp.seattype.getSelectedToggle())).getText();
-				
+			
 				int ticket_num[] = {tmp.adultTicket.getValue(), tmp.childTicket.getValue(), tmp.disableTicket.getValue(), tmp.seniorTicket.getValue()};
 				
 				Info info = new Info(

@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.time.LocalDate;
 
 import controller.SearchBookID;
@@ -53,7 +54,7 @@ public class SearchBookIDUI extends BaseUI<SearchBookIDUIFXMLController>{
 		return null;
 	}
 	
-	private void showOrderIDs(ArrayList<Integer> orderid_list) {
+	private void showOrderIDs(List<Integer> orderid_list) {
 		// change service pane
 		this.loadView("fxml/SearchBookID-showOrders.fxml");
 		//
@@ -77,11 +78,12 @@ public class SearchBookIDUI extends BaseUI<SearchBookIDUIFXMLController>{
 				System.out.println(origin);
 				String dest = this.fxml_controller.dest.getValue().toString();
 				System.out.println(dest);
-				int date = Integer.parseInt(this.fxml_controller.date.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd")));
+				
+				LocalDate date = this.fxml_controller.date.getValue();
 				System.out.println(date);
 				int trainID = Integer.parseInt(this.fxml_controller.trainID.getCharacters().toString());
 				System.out.println(trainID);
-				ArrayList<Integer> orderid_list = this.search_bookid_controller.searchOrderID(userID, origin, dest, date, trainID);
+				List<Integer> orderid_list = this.search_bookid_controller.searchOrderID(userID, origin, dest, date, trainID);
 				this.showOrderIDs(orderid_list);
 			}
 			else {
