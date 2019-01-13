@@ -109,7 +109,11 @@ public class DataAccessObject {
         pstmt = connection.prepareStatement(
                 "SELECT SeatId FROM Tickets " +
                 "WHERE TrainId = ? AND Date = ? AND SeatId = ? " +
-                "AND FromStation < ? AND ToStation > ? " +
+                "AND ( " +
+                "   FromStation < ? AND ToStation > ? " +
+                "OR " +
+                "   FromStation > ? AND ToStation < ? " +
+                ") " +
                 "LIMIT 1 " +
                 ";");
 
@@ -121,6 +125,8 @@ public class DataAccessObject {
             pstmt.setString(3,it.seat.seatId);
             pstmt.setInt(4,it.to);
             pstmt.setInt(5,it.from);
+            pstmt.setInt(6,it.to);
+            pstmt.setInt(7,it.from);
             rs = pstmt.executeQuery();
             if(rs.next()) {
                 pstmt = connection.prepareStatement(
@@ -196,7 +202,11 @@ public class DataAccessObject {
         pstmt = connection.prepareStatement(
                 "SELECT SeatId FROM Tickets " +
                 "WHERE TrainId = ? AND Date = ? AND SeatId = ? " +
-                "AND FromStation < ? AND ToStation > ? " +
+                "AND ( " +
+                "   FromStation < ? AND ToStation > ? " +
+                "OR " +
+                "   FromStation > ? AND ToStation < ? " +
+                ") " +
                 "LIMIT 1 " +
                 ";");
 
@@ -208,6 +218,8 @@ public class DataAccessObject {
             pstmt.setString(3,it.seat.seatId);
             pstmt.setInt(4,it.to);
             pstmt.setInt(5,it.from);
+            pstmt.setInt(6,it.to);
+            pstmt.setInt(7,it.from);
             rs = pstmt.executeQuery();
             // if there exist a record collision -> you can not buy this ticket
             if(rs.next()) {
@@ -251,7 +263,11 @@ public class DataAccessObject {
                 "LEFT JOIN ( " +
                 "   SELECT SeatId FROM Tickets " +
                 "   WHERE TrainId = ? AND Date = ? " +
-                "   AND FromStation < ? AND ToStation > ? " +
+                "   AND ( " +
+                "       FromStation < ? AND ToStation > ? " +
+                "   OR " +
+                "       FromStation > ? AND ToStation < ? " +
+                "   ) " +
                 ") as t2 ON t1.SeatId = t2.SeatId " +
                 "WHERE t2.SeatId IS NULL " +
                 ";");
@@ -259,6 +275,8 @@ public class DataAccessObject {
         pstmt.setString(2,date.toString());
         pstmt.setInt(3,to);
         pstmt.setInt(4,from);
+        pstmt.setInt(5,to);
+        pstmt.setInt(6,from);
         ResultSet rs = pstmt.executeQuery();
         Train train = new Train(trainId,date);
         List<Seat> res = new ArrayList<Seat>();
