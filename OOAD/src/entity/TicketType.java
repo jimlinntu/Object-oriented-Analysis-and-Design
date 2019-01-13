@@ -10,6 +10,7 @@ public enum TicketType {
 	 * @param discount(0 ~ 1)
 	 */
 	private TicketType(int index, double discount) {
+		this.index = index;
 		this.discount = discount;
 	}
 	/**

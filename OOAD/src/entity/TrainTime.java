@@ -19,7 +19,7 @@ public class TrainTime {
     	DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     	long minutesBetween = Duration.between(this.fromTime, this.toTime).toMinutes();
     	
-    	return String.format("車次號碼: %d, 日期: %s, 出發時間:%s, 到達時間: %s, 行車時間: %d:%d", 
+    	return String.format("車次號碼: %d, 日期: %s, 出發時間:%s, 到達時間: %s, 行車時間: %02d:%02d", 
     			this.trainId, this.date.format(dateFormatter), 
     			this.fromTime.format(timeFormatter), this.toTime.format(timeFormatter), 
     			minutesBetween/60, minutesBetween%60);

@@ -61,7 +61,7 @@ public class BookTicket {
 		return ;
 	}
 	
-	public void rejectOrder() {
+	public void rejectOrder(Order order) {
 		order.release() ;
 		System.out.println("[*] Order cancelled.");
 	}

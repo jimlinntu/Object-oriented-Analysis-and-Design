@@ -59,6 +59,7 @@ public class GenerateTicket {
 		for(int i = 0; i < info.ticketNum.length; i++) {
 			for(int j = 0; j < info.ticketNum[i]; j++) {
 				ticket_type_list.add(TicketType.indexToTicketType(i)); 
+				System.out.println("Ticket Type" + i);
 			}
 		}
 		if(train_times.size() == 0) {

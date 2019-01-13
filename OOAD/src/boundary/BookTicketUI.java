@@ -207,7 +207,7 @@ public class BookTicketUI extends BaseUI<BaseFXMLController>{
 		tmp.confirm.setOnAction(confirmOrder);
 		
 		EventHandler<ActionEvent> rejectOrder = (event) -> {
-			this.book_ticket_controller.rejectOrder();
+			this.book_ticket_controller.rejectOrder(order);
 			this.loadView("fxml/ShowOrder-result.fxml");
 			((ShowOrderUIFXMLController)this.fxml_controller).setResultText("訂單取消！");
 			this.startInterface();
