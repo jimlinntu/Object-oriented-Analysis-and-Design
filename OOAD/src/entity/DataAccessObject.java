@@ -209,6 +209,7 @@ public class DataAccessObject {
             pstmt.setInt(4,it.to);
             pstmt.setInt(5,it.from);
             rs = pstmt.executeQuery();
+            // if there exist a record collision -> you can not buy this ticket
             if(rs.next()) {
                 pstmt = connection.prepareStatement(
                     "UNLOCK TABLES " + 

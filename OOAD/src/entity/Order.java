@@ -5,7 +5,7 @@ import java.util.* ;
 import javafx.util.Pair;
 
 public class Order {
-    int orderId;
+    int orderId; // It will be replaced when generate( see DataAccessObject)
     String userId;
     public List<Ticket> tickets;
     public Order(int orderId, String userId, List<Ticket> tickets) {
@@ -144,11 +144,14 @@ public class Order {
      * @author jimlin
      * Release order from database(via DataAccessObject)
      */
-    public void release(){
+    public boolean release(){
+    	boolean res = false;
     	try{
-    		DataAccessObject.removeOrder(this.orderId);
+    		res =  DataAccessObject.removeOrder(this.orderId);
     	}catch(Exception e) {
-    		e.printStackTrace();
+    		// remove fail
+    		res = false;
     	}
+    	return res;
     }
 }

@@ -48,6 +48,7 @@ public class SearchReserveUI extends BaseUI<BaseFXMLController>{
 				String userID = tmp.userID.getCharacters().toString();
 				String orderID = tmp.bookid.getCharacters().toString();
 				System.out.println("ID loaded!");
+				// 
 				if(!this.showOrder(this.search_reserve_controller.searchOrder(userID, orderID))) {
 					System.out.println("[!] Failed: showOrder fail");
 				};
@@ -60,6 +61,9 @@ public class SearchReserveUI extends BaseUI<BaseFXMLController>{
 		};
 		tmp.loginSearch.setOnAction(searchbyOrderID);
 	}
+	/**
+	 * 
+	 */
 	private boolean showOrder(Order order) {
 		this.loadView("fxml/ShowOrder.fxml");
 		
@@ -67,13 +71,9 @@ public class SearchReserveUI extends BaseUI<BaseFXMLController>{
 		tmp.setOrder(order);
 		tmp.confirm.setText("退票");
 		tmp.revise.setText("換票");
+		// startInterface to show order 
+		this.startInterface();
 		
-		try {
-			this.startInterface();
-		} catch(Exception e) {
-			e.printStackTrace();
-			return false;
-		}
 		EventHandler<ActionEvent> selectDeletion = (event)->{
 			if(this.confirmAction("取消")) {
 				// delete order
@@ -81,6 +81,8 @@ public class SearchReserveUI extends BaseUI<BaseFXMLController>{
 					this.loadView("fxml/ShowOrder-result.fxml");
 					((ShowOrderUIFXMLController)this.fxml_controller).setResultText("退票成功！");
 					this.startInterface();
+				}else {
+					System.out.println("[SearchReserveUI] 取消票動作失敗");
 				}
 			}
 		};
@@ -91,6 +93,8 @@ public class SearchReserveUI extends BaseUI<BaseFXMLController>{
 				// send fixed options to controller -> new UI
 				if(search_reserve_controller.reviseOrder(order)) {
 					System.out.println("Reserve revision started!");
+				}else {
+					System.out.println("[SearchReserveUI] 修改票動作失敗");
 				}
 			}
 		};

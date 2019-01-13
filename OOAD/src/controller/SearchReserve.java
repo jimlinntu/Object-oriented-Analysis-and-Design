@@ -21,9 +21,22 @@ public class SearchReserve {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * 
+	 */
 	public Order searchOrder(String userID, String orderID) {
-		Order order = this.dao.getOrder(userID, orderID);
+		Order order = null;
+		try{
+			order = DataAccessObject.getOrder(Integer.parseInt(orderID));
+			// if this userID does not match
+			if(order.getUserId().equals(userID) == false) {
+				order = null;
+			}
+		}
+		// cannot find order
+		catch(Exception e) {
+			order = null;
+		}
 		return order;
 	}
 	public void goToMenu() {
