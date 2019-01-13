@@ -77,7 +77,7 @@
             <Pane layoutX="80.0" layoutY="194.0" prefHeight="46.0" prefWidth="439.0" style="-fx-background-color: lightblue; -fx-background-radius: 5;">
                <children>
                   <Label layoutX="274.0" layoutY="14.0" text="時間" />
-                  <DatePicker fx:id="goDate" editable="false" layoutX="69.0" layoutY="11.0" showWeekNumbers="true" />
+                  <DatePicker fx:id="goDate" disable="true" editable="false" layoutX="69.0" layoutY="11.0" showWeekNumbers="true" />
                   <ComboBox fx:id="goTime" layoutX="309.0" layoutY="10.0" prefHeight="27.0" prefWidth="96.0" />
                   <Pane fx:id="idBookPane" layoutX="296.0" prefHeight="79.0" prefWidth="268.0" visible="false">
                      <children>
@@ -89,20 +89,20 @@
                </children>
             </Pane>
             <Label layoutX="32.0" layoutY="255.0" prefHeight="28.0" prefWidth="66.0" text="車廂種類" />
-            <RadioButton fx:id="standard" layoutX="92.0" layoutY="259.0" mnemonicParsing="false" selected="true" text="標準車廂">
+            <RadioButton fx:id="standard" disable="true" layoutX="92.0" layoutY="259.0" mnemonicParsing="false" selected="true" text="標準車廂">
                <toggleGroup>
                   <ToggleGroup fx:id="cartype" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="business" layoutX="169.0" layoutY="259.0" mnemonicParsing="false" text="商務車廂" toggleGroup="$cartype" />
+            <RadioButton fx:id="business" disable="true" layoutX="169.0" layoutY="259.0" mnemonicParsing="false" text="商務車廂" toggleGroup="$cartype" />
             <Label layoutX="291.0" layoutY="254.0" prefHeight="28.0" prefWidth="66.0" text="座位喜好" />
-            <RadioButton fx:id="none_pref" layoutX="349.0" layoutY="259.0" mnemonicParsing="false" selected="true" text="無">
+            <RadioButton fx:id="none_pref" disable="true" layoutX="349.0" layoutY="259.0" mnemonicParsing="false" selected="true" text="無">
                <toggleGroup>
                   <ToggleGroup fx:id="seattype" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="window_seat" layoutX="398.0" layoutY="259.0" mnemonicParsing="false" text="靠窗優先" toggleGroup="$seattype" />
-            <RadioButton fx:id="aisle_seat" layoutX="483.0" layoutY="259.0" mnemonicParsing="false" text="走道優先" toggleGroup="$seattype" />
+            <RadioButton fx:id="window_seat" disable="true" layoutX="398.0" layoutY="259.0" mnemonicParsing="false" text="靠窗優先" toggleGroup="$seattype" />
+            <RadioButton fx:id="aisle_seat" disable="true" layoutX="483.0" layoutY="259.0" mnemonicParsing="false" text="走道優先" toggleGroup="$seattype" />
          </children></AnchorPane>
   </children>
 </VBox>

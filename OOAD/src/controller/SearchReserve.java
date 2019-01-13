@@ -8,12 +8,10 @@ import entity.Order;
 public class SearchReserve {
 	private MainPage main_page;
 	private SearchReserveUI search_reserve_ui;
-	private DataAccessObject dao;
 	
-	public SearchReserve(MainPage main_page, DataAccessObject dao) {
+	public SearchReserve(MainPage main_page) {
 		this.main_page = main_page;
 		this.search_reserve_ui = new SearchReserveUI(this, main_page.getRootPane());
-		this.dao = dao;
 		
 		try {
 			this.search_reserve_ui.startInterface();
@@ -36,6 +34,7 @@ public class SearchReserve {
 		// cannot find order
 		catch(Exception e) {
 			order = null;
+			e.printStackTrace();
 		}
 		return order;
 	}
@@ -50,7 +49,7 @@ public class SearchReserve {
 		return false;
 	}
 	public boolean reviseOrder(Order order) {
-		ReviseReserve revise_reserve_controller = new ReviseReserve(this.main_page, this.dao);
+		ReviseReserve revise_reserve_controller = new ReviseReserve(this.main_page);
 		revise_reserve_controller.showFixedInfo(order);
 		return true;
 	}

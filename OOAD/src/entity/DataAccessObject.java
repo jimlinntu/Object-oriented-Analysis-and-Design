@@ -8,6 +8,14 @@ public class DataAccessObject {
     static String user="ooad";
     static String pw="password";
     static Connection connection;
+    static {
+    	try{
+    		init();
+    	}catch(Exception e) {
+    		System.out.println("[DataAccessObject] init Exception");
+    		e.printStackTrace();
+    	}
+    }
     /**
      * initialize database connectoion
      */

@@ -21,18 +21,18 @@ public class GenerateTicketUI extends BaseUI<ShowTrainTimeFXMLController>{
 	private GenerateTicket generate_ticket_controller;
 	private Dialog<Integer> dialog;
 	
-	public GenerateTicketUI(GenerateTicket generate_ticket_controller, Pane root_pane) {
+	public GenerateTicketUI(GenerateTicket generate_ticket_controller) {
 		// Set controller association
 		this.generate_ticket_controller = generate_ticket_controller;
-		this.root_pane = root_pane;
 		// Load page
-		this.loadView("fxml/ShowTrainTimeFXMLController.fxml");
+		this.loadView("fxml/ShowTrainTime.fxml");
 		// Set up Dialog
 		this.prepareDialog();
 	}
 	private void prepareDialog() {
 		this.dialog = new Dialog<Integer>();
 		this.dialog.setHeaderText("請選擇車次");
+		
 		// Set DialogPane
 		this.dialog.setDialogPane((DialogPane)this.service_pane);
 		// Set 確認車次 button
@@ -52,13 +52,10 @@ public class GenerateTicketUI extends BaseUI<ShowTrainTimeFXMLController>{
 		this.dialog.setResultConverter(dialogButton ->{
 			if(dialogButton == confirm) {
 				int select_train = this.fxml_controller.listview.getSelectionModel().getSelectedIndex();
-				if(select_train == -1) {
-					return null;
-				}
 				return select_train;
 			}
 			else {
-				return null;
+				return -1;
 			}
 		});
 	}
@@ -83,6 +80,11 @@ public class GenerateTicketUI extends BaseUI<ShowTrainTimeFXMLController>{
 		Optional<Integer> result = this.dialog.showAndWait();
 		// 
 		int selectedTrainTimeIndex = result.get();
+		while(selectedTrainTimeIndex == -1) {
+			System.out.println(selectedTrainTimeIndex);
+			result = this.dialog.showAndWait();
+			selectedTrainTimeIndex = result.get();
+		}
 		// train_times[i]
 		return train_times.get(selectedTrainTimeIndex); 
 	}

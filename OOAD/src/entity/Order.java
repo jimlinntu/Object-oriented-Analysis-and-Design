@@ -1,4 +1,5 @@
 package entity;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.* ;
 
@@ -138,6 +139,33 @@ public class Order {
     }
     public String getUserId() {
     	return this.userId;
+    }
+    /**
+     * @author jimlin
+     * @return LocalDate[2] = {去程Date, 回程Date}
+     */
+    public LocalDate[] getDates() {
+    	LocalDate[] dates = {null, null};
+    	if(this.checkRoundTrip()) {
+    		LocalDate date = this.tickets.get(0).seat.train.date;
+    		LocalDate date_2 = null;
+    		for(Ticket ticket: this.tickets) {
+    			if(ticket.seat.train.date.isBefore(date)){ 
+    				date_2 = date;
+    				date = ticket.seat.train.date;
+    				break;
+    			}else if(ticket.seat.train.date.isAfter(date)){
+    				date_2 = ticket.seat.train.date;
+    				break;
+    			}
+    		}
+    		dates[0] = date;
+    		dates[1] = date_2;
+    		
+    	}else {
+    		dates[0] = this.tickets.get(0).seat.train.date;
+    	}
+    	return dates;
     }
     
     /**

@@ -20,13 +20,11 @@ public class BookTicket {
 	private BookTicketUI book_ticket_ui;
 	private GenerateTicket generate_ticket_controller ;
 	private Order order ;
-	private DataAccessObject dao;
 	
-	public BookTicket(MainPage main_page, DataAccessObject dao) {
+	public BookTicket(MainPage main_page) {
 		this.main_page = main_page;
-		this.generate_ticket_controller = new GenerateTicket(main_page, dao) ;
+		this.generate_ticket_controller = new GenerateTicket();
 		this.book_ticket_ui = new BookTicketUI(this, main_page.getRootPane());
-		this.dao = dao;
 		
 		try{
 			this.book_ticket_ui.startInterface();

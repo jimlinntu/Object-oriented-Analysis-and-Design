@@ -21,6 +21,20 @@ public enum CarType {
 			throw new RuntimeException("You need to input 標準車廂 or 商務車廂 or 無");
 		}
 	}
+	
+	static public String carTypeToString(CarType carType) {
+		if(carType.equals(STANDARD)) {
+			return "標準車廂";
+		}else if(carType.equals(BUSINESS)) {
+			return "商務車廂";
+		}else if(carType.equals(NONE)){
+			return "無";
+		}else {
+			assert false;
+		}
+		assert false;
+		return "絕對不會走到這裡";
+	}
 
     static public CarType of(int k)
     {

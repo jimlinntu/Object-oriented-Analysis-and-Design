@@ -23,13 +23,9 @@ import javafx.util.Pair;
  */
 public class GenerateTicket {
 	static Random orderIdRand = new Random();
-	private MainPage main_page;
 	private GenerateTicketUI generate_ticket_ui;
-	private DataAccessObject dao;
 	
-	public GenerateTicket(MainPage main_page, DataAccessObject dao) {
-		this.main_page = main_page;
-		this.dao = dao;
+	public GenerateTicket() {
 	}
 	/**
 	 * This function will change ServiceAnchorPane and let
@@ -49,7 +45,7 @@ public class GenerateTicket {
 		List<Ticket> ticket_list = new ArrayList<Ticket>();
 		int totalTicketNum = IntStream.of(info.ticketNum).sum();
 		// Set up UI interface 
-		this.generate_ticket_ui = new GenerateTicketUI(this, main_page.getRootPane());
+		this.generate_ticket_ui = new GenerateTicketUI(this);
 		// Get available train times (go) 
 		List<TrainTime> train_times = null;
 		try{
