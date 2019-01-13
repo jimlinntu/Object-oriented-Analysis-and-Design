@@ -69,7 +69,7 @@ public class Order {
      * @author jimlin
      * @return int[2](from to), LocalTime[4]= {goDepart, goArrival , backDepart, backArrival}
      */
-    public Pair<int[], LocalTime[]> getFromTo() {
+    public Pair<int[], LocalTime[]> getFromTo() throws Exception {
     	assert this.tickets.size() > 0;
     	// check which date is before, then its from is what we want
     	int from = -1, to = -1;

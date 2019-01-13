@@ -21,6 +21,20 @@ public enum CarType {
 			throw new RuntimeException("You need to input 標準車廂 or 商務車廂 or 無");
 		}
 	}
+
+    static public CarType of(int k)
+    {
+        switch(k) {
+        case 0:
+            return STANDARD;
+        case 1:
+            return BUSINESS;
+        case 2:
+            return NONE;
+        default:
+            throw new RuntimeException("You need to input 0~2");
+        }
+    }
 	
 	public int getValue() {
 		return this.value;

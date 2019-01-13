@@ -1,11 +1,7 @@
 package entity;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 import java.sql.*;
 import java.time.*;
-
-import entity.Order;
-import entity.Ticket;
 
 public class DataAccessObject {
     static String url="jdbc:mysql://localhost:3306/ooad?useSSL=false&serverTimezone=UTC";
@@ -73,7 +69,9 @@ public class DataAccessObject {
 	
     public static Order getOrder(int orderId) throws Exception {
         PreparedStatement pstmt = connection.prepareStatement(
-                "SELECT TrainId,Date,SeatId,FromStation,ToStation,Type FROM Tickets " +
+                "SELECT t1.TrainId,t1.Date,t1.SeatId,t1.FromStation,t1.ToStation,t1.Type,t2.Type " +
+                "FROM Tickets AS t1 " +
+                "LEFT JOIN Seats AS t2 ON t1.SeatId = t2.SeatId " +
                 "WHERE OrderId = ? " +
                 ";" );
         pstmt.setInt(1,orderId);
@@ -81,8 +79,8 @@ public class DataAccessObject {
         List<Ticket> tickets = new ArrayList<Ticket>();
         while(rs.next()) {
             Train train = new Train(rs.getInt(1),LocalDate.parse(rs.getString(2)));
-            Seat seat = new Seat(train,rs.getString(3));
-            Ticket ticket = new Ticket(seat,rs.getInt(4),rs.getInt(5),rs.getInt(6));
+            Seat seat = new Seat(train,rs.getString(3),CarType.of(rs.getInt(7)));
+            Ticket ticket = new Ticket(seat,rs.getInt(4),rs.getInt(5),TicketType.of(rs.getInt(6)));
             tickets.add(ticket);
         }
         pstmt = connection.prepareStatement(
@@ -146,7 +144,7 @@ public class DataAccessObject {
             pstmt.setString(3,it.seat.seatId);
             pstmt.setInt(4,it.from);
             pstmt.setInt(5,it.to);
-            pstmt.setInt(6,it.type);
+            pstmt.setInt(6,it.ticketType.toInt());
             pstmt.execute();
         }
         
@@ -235,7 +233,7 @@ public class DataAccessObject {
             pstmt.setString(4,it.seat.seatId);
             pstmt.setInt(5,it.from);
             pstmt.setInt(6,it.to);
-            pstmt.setInt(7,it.type);
+            pstmt.setInt(7,it.ticketType.toInt());
             pstmt.execute();
         }
 
@@ -245,16 +243,69 @@ public class DataAccessObject {
         pstmt.execute();
         return true;
     }
-    /**
-     * TODO:
-     */
-    public static List<Seat> getAvailableSeats(TrainTime trainTime){
-    	return new ArrayList<Seat>(){
-    		{
-    		}
-    	};
+    public static List<Seat> getAvailableSeats(int trainId, LocalDate date, int from, int to) throws Exception {
+        PreparedStatement pstmt = connection.prepareStatement(
+                "SELECT t1.SeatId,t1.Type FROM Seats AS t1 " +
+                "LEFT JOIN ( " +
+                "   SELECT SeatId FROM Tickets " +
+                "   WHERE TrainId = ? AND Date = ? " +
+                "   AND FromStation < ? AND ToStation > ? " +
+                ") as t2 ON t1.SeatId = t2.SeatId " +
+                "WHERE t2.SeatId IS NULL " +
+                ";");
+        pstmt.setInt(1,trainId);
+        pstmt.setString(2,date.toString());
+        pstmt.setInt(3,to);
+        pstmt.setInt(4,from);
+        ResultSet rs = pstmt.executeQuery();
+        Train train = new Train(trainId,date);
+        List<Seat> res = new ArrayList<Seat>();
+        while(rs.next()) {
+            res.add(new Seat(train,rs.getString(1),CarType.of(rs.getInt(2))));
+        }
+        return res;
     }
-    
+    public static List<Seat> getAvailableSeats(TrainTime trainTime) throws Exception {
+        PreparedStatement pstmt = connection.prepareStatement(
+                "SELECT StationId FROM Froms " +
+                "WHERE TrainId = ? AND Date = ? AND Time = ? " +
+                ";");
+        pstmt.setInt(1,trainTime.trainId);
+        pstmt.setString(2,trainTime.date.toString());
+        pstmt.setString(3,trainTime.fromTime.toString());
+        ResultSet rs = pstmt.executeQuery();
+        rs.next();
+        int from = rs.getInt(1);
+        pstmt = connection.prepareStatement(
+                "SELECT StationId FROM Tos " +
+                "WHERE TrainId = ? AND Date = ? AND Time = ? " +
+                ";");
+        pstmt.setInt(1,trainTime.trainId);
+        pstmt.setString(2,trainTime.date.toString());
+        pstmt.setString(3,trainTime.toTime.toString());
+        rs = pstmt.executeQuery();
+        rs.next();
+        int to = rs.getInt(1);
+        return getAvailableSeats(trainTime.trainId,trainTime.date,from,to);
+    };
+
+    /**
+     * TODO
+     */
+    public static TrainTime getTrainTime(Train train, int from, int to) throws Exception {
+        PreparedStatement pstmt = connection.prepareStatement(
+                "SELECT Froms.Time,Tos.Time " +
+                "FROM Froms INNER JOIN Tos " +
+                "ON Froms.TrainId = Tos.TrainId AND Froms.Date = Tos.Date " +
+                "WHERE Froms.TrainId = ? AND Froms.Date = ? " +
+                ";");
+        pstmt.setInt(1,train.trainId);
+        pstmt.setString(2,train.date.toString());
+        ResultSet rs = pstmt.executeQuery();
+        rs.next();
+        return new TrainTime(train.trainId, train.date,
+                LocalTime.parse(rs.getString(1)), LocalTime.parse(rs.getString(2)));
+    }
     
     /**
      * test
@@ -271,11 +322,13 @@ public class DataAccessObject {
         Order order = getOrder(1);
         for( Ticket it:order.tickets ) {
             System.out.printf("%d %s %s %d %d %d\n",it.seat.train.trainId,it.seat.train.date,
-                    it.seat.seatId,it.from,it.to,it.type);
+                    it.seat.seatId,it.from,it.to,it.ticketType.toInt());
         }
         List<Ticket> tickets = new ArrayList<Ticket>();
-        tickets.add(new Ticket(new Seat(new Train(100,LocalDate.of(2019,1,11)),"3"),0,1,0));
-        tickets.add(new Ticket(new Seat(new Train(100,LocalDate.of(2019,1,11)),"4"),0,1,0));
+        tickets.add(new Ticket(new Seat(new Train(100,LocalDate.of(2019,1,11)),"3",CarType.STANDARD),
+                0,1,TicketType.ADULT));
+        tickets.add(new Ticket(new Seat(new Train(100,LocalDate.of(2019,1,11)),"4",CarType.STANDARD),
+                0,1,TicketType.ADULT));
         order = new Order(-1,"XD",tickets);
         if(writeOrder(order))
         {
@@ -283,7 +336,7 @@ public class DataAccessObject {
             System.out.printf("%d %s\n",order.orderId,order.userId);
             for( Ticket it:order.tickets ) {
                 System.out.printf("%d %s %s %d %d %d\n",it.seat.train.trainId,it.seat.train.date,
-                        it.seat.seatId,it.from,it.to,it.type);
+                        it.seat.seatId,it.from,it.to,it.ticketType.toInt());
             }
             order.tickets.get(0).seat.seatId = "5";
             order.tickets.get(1).seat.seatId = "6";
@@ -292,10 +345,16 @@ public class DataAccessObject {
                 System.out.printf("%d %s\n",order.orderId,order.userId);
                 for( Ticket it:order.tickets ) {
                     System.out.printf("%d %s %s %d %d %d\n",it.seat.train.trainId,it.seat.train.date,
-                            it.seat.seatId,it.from,it.to,it.type);
+                            it.seat.seatId,it.from,it.to,it.ticketType.toInt());
                 }
             }
             removeOrder(order);
         }
+        for(Seat it:getAvailableSeats(new TrainTime(100,LocalDate.of(2019,1,11),
+                LocalTime.of(0,0,0),LocalTime.of(1,0,0)))) {
+            System.out.printf("%s\n",it.seatId);
+        }
+        TrainTime tt = getTrainTime(new Train(100,LocalDate.of(2019,1,11)),0,1);
+        System.out.printf("%d %s %s %s\n",tt.trainId,tt.date,tt.fromTime,tt.toTime);
     }
 }

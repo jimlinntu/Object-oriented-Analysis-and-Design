@@ -51,5 +51,10 @@ public enum TicketType {
 		assert false;
 		return null;
 	}
-	
+    public static TicketType of(int k) {
+        return indexToTicketType(k);
+    }
+    public int toInt() {
+        return getIndex();
+    }
 }
