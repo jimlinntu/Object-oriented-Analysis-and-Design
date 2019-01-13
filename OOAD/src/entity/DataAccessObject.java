@@ -53,6 +53,7 @@ public class DataAccessObject {
                 "   SELECT TrainId,Time FROM Tos " + 
                 "   WHERE Date = ? AND StationId = ? " +
                 ") AS t2 ON t1.TrainId = t2.TrainId " +
+                "WHERE t1.Time < t2.Time " +
                 ";" );
         pstmt.setString(1,date.toString());
         pstmt.setInt(2,from);
@@ -311,6 +312,9 @@ public class DataAccessObject {
      * test
      */
     public static void main(String []args) throws Exception {
+        url="jdbc:mysql://localhost:3306/ooad_test?useSSL=false&serverTimezone=UTC";
+        user="ooad_test";
+        pw="password";
         init();
         for( Integer it:getOrderId("OAO",0,1,LocalDate.of(2019,1,11),100) ) {
             System.out.printf("%d\n",it.intValue());
