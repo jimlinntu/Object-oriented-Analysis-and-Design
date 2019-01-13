@@ -1,8 +1,10 @@
 package boundary;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import entity.Order;
+import entity.Station;
 import entity.Ticket;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
 
 public class ReviseReserveUIFXMLController extends BaseFXMLController {
 
@@ -98,13 +101,26 @@ public class ReviseReserveUIFXMLController extends BaseFXMLController {
     protected RadioButton aisle_seat;
 
     public void setInfo(Order order) {
-    	this.adultTicket.setText(String.valueOf(order.adultTicket));
-		this.childTicket.setText(String.valueOf(order.childTicket));
-		this.disableTicket.setText(String.valueOf(order.disableTicket));
-		this.seniorTicket.setText(String.valueOf(order.seniorTicket));
-		this.origin.setText(order.origin);
-		this.dest.setText(order.dest);
-		this.userid.setText(order.userID);
+    	int[] ticket_num = order.getTicketNum();
+    	double cost = order.getCost();
+    	Pair<int[], LocalTime[]> pair = null;
+    	try{
+    		pair = order.getFromTo();
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	int[] fromto = pair.getKey();
+    	LocalTime[] times = pair.getValue();
+    	int from = fromto[0], to = fromto[1];
+    	LocalTime goDepart = times[0], goArrival = times[1];
+    	
+    	this.adultTicket.setText(String.valueOf(ticket_num[0]));
+		this.childTicket.setText(String.valueOf(ticket_num[1]));
+		this.disableTicket.setText(String.valueOf(ticket_num[2]));
+		this.seniorTicket.setText(String.valueOf(ticket_num[3]));
+		this.origin.setText(Station.CHI_NAME[from]);
+		this.dest.setText(Station.CHI_NAME[to]);
+		this.userid.setText(order.getUserId());
 		this.initializeTime(goTime);
     }
 }

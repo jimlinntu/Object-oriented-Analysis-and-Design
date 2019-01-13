@@ -89,7 +89,13 @@ public class GenerateTicket {
 			}
 			System.out.println("[去程] 你選擇了: " + selectedTrainTime.trainId + "車次");
 			// Get Available Seats(go and back)
-			List<Seat> seat_list = DataAccessObject.getAvailableSeats(selectedTrainTime);
+			List<Seat> seat_list = null;
+			try {
+				seat_list = DataAccessObject.getAvailableSeats(selectedTrainTime);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+				
 			List<Seat> candidate_seats = new ArrayList<Seat>();
 			
 			// Search(Find the first match)
@@ -147,7 +153,13 @@ public class GenerateTicket {
 				}
 			}
 			System.out.println("[回程] 你選擇了" + backSelectedTrainTime.trainId + "車次");
-			List<Seat> back_seat_list = DataAccessObject.getAvailableSeats(backSelectedTrainTime);
+			List<Seat> back_seat_list = null;
+			try {
+				back_seat_list = DataAccessObject.getAvailableSeats(backSelectedTrainTime);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+				
 			List<Seat> back_candidate_seats = new ArrayList<Seat>();
 			// Search back part
 			for(Seat seat: back_seat_list) {

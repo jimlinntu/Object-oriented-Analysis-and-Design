@@ -94,7 +94,12 @@ public class ShowOrderUIFXMLController extends BaseFXMLController implements Ini
     public void setOrder(Order order) {
     	int[] ticket_num = order.getTicketNum();
     	double cost = order.getCost();
-    	Pair<int[], LocalTime[]> pair = order.getFromTo();
+    	Pair<int[], LocalTime[]> pair = null;
+    	try{
+    		pair = order.getFromTo();
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
     	int[] fromto = pair.getKey();
     	LocalTime[] times = pair.getValue();
     	int from = fromto[0], to = fromto[1];
