@@ -9,6 +9,7 @@ import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -79,6 +80,15 @@ public class MainPage extends Application{
 		// 回到主畫面
 		this.fxml_controller.goToMenuItem.setOnAction(event->{
 			this.goToMenu();
+		});
+		// 關於
+		this.fxml_controller.about.setOnAction(event->{
+			Alert alert = new Alert(AlertType.NONE, 
+					"高鐵訂票系統 \n"
+					+ "Powered by jimlinntu, rederice, yao11617, hummingbird7"
+					+ " @ 2019");
+			alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
+			alert.showAndWait();
 		});
 	}
 	

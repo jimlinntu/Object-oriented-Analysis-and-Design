@@ -26,7 +26,11 @@ public class MainPageFXMLController implements Initializable{
     public MenuItem goToMenuItem;
     
     @FXML
+    public MenuItem about;
+    
+    @FXML
     public AnchorPane service_pane;
+    
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
