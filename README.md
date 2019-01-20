@@ -43,5 +43,4 @@ We designed a Java GUI Program aiming to provide a THSR Booking System by softwa
 * [yao11617](https://github.com/yao11617)
 
 ## Acknowledgement
-* Our instructor - [Huang Chien-Kang](Huang Chien-Kang)
-	 
+* Our instructor - [Huang Chien-Kang](https://www.facebook.com/chienkanghuang)
